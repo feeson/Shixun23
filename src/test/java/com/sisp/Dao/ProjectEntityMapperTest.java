@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Copy;
 import org.junit.platform.commons.JUnitException;
 import org.mockito.internal.junit.JUnitRule;
 import org.mockito.internal.junit.JUnitTestRule;
@@ -43,32 +44,28 @@ class ProjectEntityMapperTest {
     }
 
     @Test
-    void queryProjectList() {
+    void queryProjectList() throws IOException {
+        insert();
+
         ProjectEntity projectEntity=new ProjectEntity();
-        projectEntity.setId(String.valueOf(UUID.randomUUID()));
-        projectEntity.setUserId("testUserId");
-        projectEntity.setProjectName("testProjectName");
-        projectEntity.setProjectContent("testProjectContent");
-        projectEntity.setCreatedBy("testCreatedBy");
-        projectEntity.setCreationDate(new Date(new java.util.Date().getTime()));
-        projectEntity.setLastUpdatedBy("testLastUpdatedBy");
-        projectEntity.setLastUpdateDate(new Date(new java.util.Date().getTime()));
-
-        Assertions.assertEquals(1,projectEntityMapper.insert(projectEntity));
-
-        projectEntity=new ProjectEntity();
         projectEntity.setUserId("UserId");
+
         Assertions.assertEquals(1,projectEntityMapper.queryProjectList(projectEntity).size());
         projectEntity.setProjectName("ProjectName");
+
         Assertions.assertEquals(1,projectEntityMapper.queryProjectList(projectEntity).size());
         projectEntity.setProjectContent("ProjectContent");
+
         Assertions.assertEquals(1,projectEntityMapper.queryProjectList(projectEntity).size());
         projectEntity.setCreatedBy("CreatedBy");
+
         Assertions.assertEquals(0,projectEntityMapper.queryProjectList(projectEntity).size());
         projectEntity.setCreatedBy(null);
         projectEntity.setCreationDate(new Date(new java.util.Date().getTime()));
+
         Assertions.assertEquals(1,projectEntityMapper.queryProjectList(projectEntity).size());
         projectEntity.setLastUpdatedBy("wrongLastUpdatedBy");
+
         Assertions.assertEquals(0,projectEntityMapper.queryProjectList(projectEntity).size());
     }
 
@@ -90,7 +87,24 @@ class ProjectEntityMapperTest {
     }
 
     @Test
-    void updateByPrimaryKeySelective() {
+    void updateByPrimaryKeySelective() throws IOException {
+        insert();
+
+        ProjectEntity projectEntity=new ProjectEntity();
+        projectEntity.setUserId("testUserId");
+        List<ProjectEntity> projectEntities = projectEntityMapper.queryProjectList(
+                projectEntity);
+        ProjectEntity o = projectEntities.get(0);
+        projectEntities = projectEntityMapper.queryProjectList(
+                projectEntity);
+        ProjectEntity n= projectEntities.get(0);
+        o.setProjectContent("newContent");
+        projectEntityMapper.updateByPrimaryKeySelective(o);
+        projectEntities=projectEntityMapper.queryProjectList(projectEntity);
+        o=projectEntities.get(0);
+        n.setProjectContent("newContent");
+        Assertions.assertEquals(n,o);
+
     }
 
     @Test

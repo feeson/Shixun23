@@ -1,10 +1,7 @@
 package com.sisp.Dao;
 
 import com.sisp.entity.ProjectEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -40,6 +37,16 @@ public interface ProjectEntityMapper {
             "</when>",
             "</script>"
     })
+    @Results(id = "projectResultMap", value = {
+            @Result(column = "id", property = "id"),
+            @Result(column = "user_id",property = "userId"),
+            @Result(column = "project_name",property = "projectName"),
+            @Result(column = "project_content",property = "projectContent"),
+            @Result(column = "created_by",property = "createdBy"),
+            @Result(column = "creation_date",property = "creationDate"),
+            @Result(column = "last_updated_by",property = "lastUpdatedBy"),
+            @Result(column = "last_update_date",property = "lastUpdateDate")
+    })
     List<ProjectEntity> queryProjectList(ProjectEntity projectEntity);
 
     @Insert("INSERT INTO project (id,user_id,project_name,project_content,created_by,creation_date,last_updated_by,last_update_date) " +
@@ -47,6 +54,34 @@ public interface ProjectEntityMapper {
     int insert(ProjectEntity projectEntity);
 
 
+    @Update({
+            "<script>",
+            "UPDATE project",
+            "<when test='userId!=null'>",
+            "SET ",
+            "user_id = #{userId},",
+            "</when>",
+            "<when test='projectName != null'>",
+            "project_name = #{projectName},",
+            "</when>",
+            "<when test='projectContent!=null'>",
+            "project_content = #{projectContent},",
+            "</when>",
+            "<when test='createdBy !=null'>",
+            "created_by = #{createdBy},",
+            "</when>",
+            "<when test='creationDate!=null'>",
+            "creation_date = #{creationDate},",
+            "</when>",
+            "<when test='lastUpdatedBy!=null'>",
+            "last_updated_by = #{lastUpdatedBy},",
+            "</when>",
+            "<when test='lastUpdateDate!=null'>",
+            "last_update_date = #{lastUpdateDate}",
+            "</when>",
+            "WHERE id = #{id}",
+            "</script>"
+    })
     int updateByPrimaryKeySelective(ProjectEntity projectEntity);
 
     int deleteProjectById(ProjectEntity projectEntity);
