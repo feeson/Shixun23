@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration><!-- 配置 -->
+    <typeAliases>
+        <package name="cloud.dicsfeesono.shixun"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/ShiXun23?serverTimezone=Asia/Shanghai&amp;characterEncoding=utf-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="feeson"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/UserEntityMapper.xml"/>
+    </mappers>
+</configuration>
