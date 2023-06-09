@@ -1,4 +1,4 @@
-package cloud.dicsfeesono.shixun.util;
+package cloud.dicsfeesono.shixun.common.utils;
 
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -23,7 +23,7 @@ public class SpringSecurityUtil {
     /**
      * 登录
      *
-     * @param user_id    用户名
+     * @param username    用户名
      * @param password    密码
      * @param authorities 权限
      */
