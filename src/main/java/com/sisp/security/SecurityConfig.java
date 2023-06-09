@@ -23,7 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                                        "/swagger-ui.html", "/swagger-resources/**",
                                                        "/webjars/springfox-swagger-ui/**",
 
-                                                       "/**",
 
                                                        "/api/login/**",
                                                        "/register/**",
@@ -38,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                    }
                 )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/login/")
+                        .loginPage("/")
                         .defaultSuccessUrl("/shop/")
                         .permitAll()
                 )

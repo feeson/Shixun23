@@ -3,6 +3,7 @@ package com.sisp.controller;
 import com.sisp.entity.dto.HttpResponseEntity;
 import com.sisp.entity.UserEntity;
 import com.sisp.service.UserService;
+import com.sisp.utils.SpringSecurityUtil;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +39,9 @@ public class UserController {
                 httpResponseEntity.setCode("666");
                 httpResponseEntity.setData(hasUsers);
                 httpResponseEntity.setMessage("登录成功");
+
+                //加入白名单
+                SpringSecurityUtil.login(userEntity.getId(),userEntity.getPassword(),new ArrayList<>());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
