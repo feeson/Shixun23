@@ -1,4 +1,4 @@
-package cloud.dicsfeesono.shixun;
+package com.sisp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

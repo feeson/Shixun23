@@ -1,4 +1,4 @@
-package cloud.dicsfeesono.shixun;
+package com.sisp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

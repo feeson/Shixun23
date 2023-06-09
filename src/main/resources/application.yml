@@ -96,7 +96,7 @@ logging:
         - ref: rollingFile
 
 mybatis:
-  mapper-locations: classpath:dao/*.xml
+  mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cloud.dicsfeesono.shixun.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
