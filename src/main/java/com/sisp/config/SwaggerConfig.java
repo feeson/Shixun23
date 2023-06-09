@@ -1,4 +1,4 @@
-package cloud.dicsfeesono.shixun.config;
+package com.sisp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("cloud.dicsfeesono.javawebwork.api"))
+                .apis(RequestHandlerSelectors.basePackage("com.sisp.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
@@ -27,8 +27,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Web大作业api")
-                .description("Web大作业api")
+                .title("23实训")
+                .description("软件21级23年春季实训")
                 .version("1.0.0")
                 .build();
     }

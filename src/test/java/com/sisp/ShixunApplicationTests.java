@@ -1,4 +1,4 @@
-package cloud.dicsfeesono.shixun;
+package com.sisp;
 
 import cloud.dicsfeesono.shixun.dao.UserEntityMapper;
 import cloud.dicsfeesono.shixun.dao.entity.UserEntity;

@@ -1,4 +1,4 @@
-package cloud.dicsfeesono.shixun.security;
+package com.sisp.security;
 
 
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                                        "/swagger-ui/**","/v2/**","/v3/**",
                                                        "/swagger-ui.html", "/swagger-resources/**",
                                                        "/webjars/springfox-swagger-ui/**",
+
+                                                       "/**",
 
                                                        "/api/login/**",
                                                        "/register/**",

@@ -97,7 +97,7 @@ logging:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: cloud.dicsfeesono.shixun.dao.entity
+  type-aliases-package: cloud.dicsfeesono.shixun.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     log-prefix:

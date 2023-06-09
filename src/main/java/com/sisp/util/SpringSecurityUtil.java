@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/cloud/dicsfeesono/shixun/common/utils/SpringSecurityUtil.java
 package cloud.dicsfeesono.shixun.common.utils;
+========
+package com.sisp.util;
+>>>>>>>> 2be44554404aea3d951db3e5089556b078b58f23:src/main/java/com/sisp/util/SpringSecurityUtil.java
 
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
