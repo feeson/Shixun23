@@ -108,6 +108,15 @@ class ProjectEntityMapperTest {
     }
 
     @Test
-    void deleteProjectById() {
+    void deleteProjectById() throws IOException {
+        insert();
+
+        ProjectEntity project=new ProjectEntity();
+        project.setUserId("testUserId");
+        project=projectEntityMapper.queryProjectList(project).get(0);
+
+        ProjectEntity projectEntity=new ProjectEntity();
+        projectEntity.setId(project.getId());
+        Assertions.assertEquals(1,projectEntityMapper.deleteProjectById(projectEntity));
     }
 }

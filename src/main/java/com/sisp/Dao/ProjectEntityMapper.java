@@ -84,5 +84,6 @@ public interface ProjectEntityMapper {
     })
     int updateByPrimaryKeySelective(ProjectEntity projectEntity);
 
+    @Delete("DELETE FROM project WHERE id = #{id}")
     int deleteProjectById(ProjectEntity projectEntity);
 }
