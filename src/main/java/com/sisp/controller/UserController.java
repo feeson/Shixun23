@@ -1,8 +1,9 @@
-package cloud.dicsfeesono.shixun.controller;
+package com.sisp.controller;
 
-import cloud.dicsfeesono.shixun.beans.HttpResponseEntity;
-import cloud.dicsfeesono.shixun.dao.entity.UserEntity;
-import cloud.dicsfeesono.shixun.service.UserService;
+import com.sisp.entity.dto.HttpResponseEntity;
+import com.sisp.entity.UserEntity;
+import com.sisp.service.UserService;
+import com.sisp.utils.SpringSecurityUtil;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,13 +32,16 @@ public class UserController {
             List<UserEntity> hasUsers  = userService.selectUserInfo(userEntity);
 
             if (CollectionUtils.isEmpty(hasUsers)) {
-                httpResponseEntity.setCode("0");
+                httpResponseEntity.setCode("403");
                 httpResponseEntity.setData(hasUsers.get(0));
                 httpResponseEntity.setMessage("用户名或密码错误");
             } else {
-                httpResponseEntity.setCode("666");
+                httpResponseEntity.setCode("200");
                 httpResponseEntity.setData(hasUsers);
                 httpResponseEntity.setMessage("登录成功");
+
+                //加入白名单
+                SpringSecurityUtil.login(userEntity.getId(),userEntity.getPassword(),new ArrayList<>());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -54,11 +59,11 @@ public class UserController {
             List<UserEntity> hasUsers  = userService.queryUserList(userEntity);
 
             if (CollectionUtils.isEmpty(hasUsers)) {
-                httpResponseEntity.setCode("0");
+                httpResponseEntity.setCode("403");
                 httpResponseEntity.setData(hasUsers.get(0));
                 httpResponseEntity.setMessage("无用户信息");
             } else {
-                httpResponseEntity.setCode("666");
+                httpResponseEntity.setCode("200");
                 httpResponseEntity.setData(hasUsers);
                 httpResponseEntity.setMessage("登录成功");
             }
@@ -77,11 +82,11 @@ public class UserController {
             int result = userService.addUserInfo(userEntity);
 
             if (result != 0) {
-                httpResponseEntity.setCode("666");
+                httpResponseEntity.setCode("200");
                 httpResponseEntity.setData(result);
                 httpResponseEntity.setMessage("创建成功");
             } else {
-                httpResponseEntity.setCode("0");
+                httpResponseEntity.setCode("403");
                 httpResponseEntity.setData(0);
                 httpResponseEntity.setMessage("创建失败");
             }
@@ -100,11 +105,11 @@ public class UserController {
             int result = userService.modifyUserInfo(userEntity);
 
             if (result != 0) {
-                httpResponseEntity.setCode("666");
+                httpResponseEntity.setCode("200");
                 httpResponseEntity.setData(result);
                 httpResponseEntity.setMessage("修改成功");
             } else {
-                httpResponseEntity.setCode("0");
+                httpResponseEntity.setCode("403");
                 httpResponseEntity.setData(0);
                 httpResponseEntity.setMessage("修改失败");
             }
@@ -123,11 +128,11 @@ public class UserController {
             int result = userService.deleteUserById(userEntity);
 
             if (result != 0) {
-                httpResponseEntity.setCode("666");
+                httpResponseEntity.setCode("200");
                 httpResponseEntity.setData(result);
                 httpResponseEntity.setMessage("删除成功");
             } else {
-                httpResponseEntity.setCode("0");
+                httpResponseEntity.setCode("403");
                 httpResponseEntity.setData(0);
                 httpResponseEntity.setMessage("删除失败");
             }

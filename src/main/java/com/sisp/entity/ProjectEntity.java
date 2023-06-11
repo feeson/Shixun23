@@ -1,12 +1,16 @@
 package com.sisp.entity;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.UUID;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Table(name = "project")
 @Entity
 public class ProjectEntity {
@@ -28,4 +32,26 @@ public class ProjectEntity {
     private String lastUpdatedBy;
     @Column(name = "lastUpdateDate",nullable = false)
     private Date lastUpdateDate;
+
+    public boolean integrityCheck(){
+        if (userId==null||userId.trim().equals(""))
+            return false;
+        if (projectName==null||projectName.trim().equals(""))
+            return false;
+        return projectContent != null && !projectContent.trim().equals("");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(
+                this) != Hibernate.getClass(o)) return false;
+        ProjectEntity that = (ProjectEntity) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

@@ -1,8 +1,8 @@
-package cloud.dicsfeesono.shixun.service;
+package com.sisp.service;
 
-import cloud.dicsfeesono.shixun.common.utils.UUIDUtil;
-import cloud.dicsfeesono.shixun.dao.UserEntityMapper;
-import cloud.dicsfeesono.shixun.dao.entity.UserEntity;
+import com.sisp.utils.UUIDUtil;
+import com.sisp.Dao.UserEntityMapper;
+import com.sisp.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

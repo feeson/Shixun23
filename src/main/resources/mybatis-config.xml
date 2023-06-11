@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration><!-- 配置 -->
     <typeAliases>
-        <package name="cloud.dicsfeesono.shixun"/>
+        <package name="com.sisp"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -19,5 +19,6 @@
     </environments>
     <mappers>
         <mapper resource="mapper/UserEntityMapper.xml"/>
+        <mapper class="com.sisp.Dao.ProjectEntityMapper"/>
     </mappers>
 </configuration>

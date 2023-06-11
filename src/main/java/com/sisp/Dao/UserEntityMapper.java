@@ -1,12 +1,11 @@
-package cloud.dicsfeesono.shixun.dao;
+package com.sisp.Dao;
 
-import cloud.dicsfeesono.shixun.dao.entity.UserEntity;
+import com.sisp.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 @Mapper
 public interface UserEntityMapper {
     int insert(UserEntity userEntity);
