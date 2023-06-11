@@ -20,10 +20,10 @@ public class JsonToUrlEncodedAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-//        if ("POST".equals(request.getMethod()) && MediaType.APPLICATION_JSON_VALUE.equals(request.getHeader("Content-Type"))) {
-//            Map<String, Object> requestBody = new ObjectMapper().readValue(request.getInputStream(), Map.class);
-//            request=new RequestWrapper(request,requestBody);
-//        }
+        if ("POST".equals(request.getMethod()) && MediaType.APPLICATION_JSON_VALUE.equals(request.getHeader("Content-Type"))) {
+            Map<String, Object> requestBody = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+            request=new RequestWrapper(request,requestBody);
+        }
         filterChain.doFilter(request, response);
     }
 

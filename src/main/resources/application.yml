@@ -35,6 +35,65 @@ server:
 logging:
   file:
     path: /springboot/log/vpn/
+  appenders:
+    - name: rollingFile
+      type: RollingFile
+      fileName: ${sys:LOG_PATH}/${logger:onlyName()}.log
+      filePattern: ${sys:LOG_PATH}/${logger:onlyName()}-%d{yyyy-MM-dd}-%i.log.gz
+      layout:
+        type: PatternLayout
+        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+      policies:
+        - type: SizeBasedTriggeringPolicy
+          size: 10MB
+        - type: TimeBasedTriggeringPolicy
+          interval: 1
+          modulate: true
+      strategy:
+        type: DefaultRolloverStrategy
+        max: 7
+        fileIndex: max
+  loggers:
+    - name: revokeFaildLog
+      level: info
+      additivity: false
+      appender-ref:
+        - ref: rollingFile
+    - name: revokeSuccessLog
+      level: info
+      additivity: false
+      appender-ref:
+        - ref: rollingFile
+    - name: deleteFaildLog
+      level: info
+      additivity: false
+      appender-ref:
+        - ref: rollingFile
+    - name: deleteSuccessLog
+      level: info
+      additivity: false
+      appender-ref:
+        - ref: rollingFile
+    - name: DailyExpirationDetectionExc
+      level: info
+      additivity: false
+      appender-ref:
+        - ref: rollingFile
+    - name: Notify
+      level: info
+      additivity: false
+      appender-ref:
+        - ref: rollingFile
+    - name: RuntimeError
+      level: info
+      additivity: false
+      appender-ref:
+        - ref: rollingFile
+    - name: FileError
+      level: info
+      additivity: false
+      appender-ref:
+        - ref: rollingFile
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
