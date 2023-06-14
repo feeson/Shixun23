@@ -3,7 +3,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/ShiXun23?useUnicode=true&characterEncoding=utf8
     username: root
-    password: feeson
+    password: 200355lyx
   security:
     form-login:
       login-page: /login/login
@@ -38,7 +38,7 @@ logging:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: cloud.dicsfeesono.shixun.entity
+  type-aliases-package: com.sisp.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     log-prefix:
