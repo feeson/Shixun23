@@ -33,7 +33,7 @@ public class UserController {
 
             if (CollectionUtils.isEmpty(hasUsers)) {
                 httpResponseEntity.setCode("403");
-                httpResponseEntity.setData(hasUsers.get(0));
+//                httpResponseEntity.setData(hasUsers.get(0));
                 httpResponseEntity.setMessage("用户名或密码错误");
             } else {
                 httpResponseEntity.setCode("200");
@@ -41,7 +41,7 @@ public class UserController {
                 httpResponseEntity.setMessage("登录成功");
 
                 //加入白名单
-                SpringSecurityUtil.login(userEntity.getId(),userEntity.getPassword(),new ArrayList<>());
+                SpringSecurityUtil.login(hasUsers.get(0).getId(),userEntity.getPassword(),new ArrayList<>());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

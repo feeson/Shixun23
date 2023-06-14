@@ -57,8 +57,8 @@ public interface ProjectEntityMapper {
     @Update({
             "<script>",
             "UPDATE project",
-            "<when test='userId!=null'>",
             "SET ",
+            "<when test='userId!=null'>",
             "user_id = #{userId},",
             "</when>",
             "<when test='projectName != null'>",

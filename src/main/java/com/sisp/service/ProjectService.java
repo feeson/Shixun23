@@ -35,6 +35,7 @@ public class ProjectService {
     public HttpResponseEntity addProjectInfo(ProjectEntity projectEntity) throws SQLException {
         String currentUserId =SpringSecurityUtil.getCurrentUsername();
         long currentTime = new Date().getTime();
+        projectEntity.setUserId(currentUserId);
         projectEntity.setId(String.valueOf(UUID.randomUUID()));
         projectEntity.setCreatedBy(currentUserId);
         projectEntity.setCreationDate(new java.sql.Date(currentTime));
@@ -52,7 +53,7 @@ public class ProjectService {
 
     @Transactional
     public HttpResponseEntity modifyProjectInfo(ProjectEntity projectEntity) throws SQLException {
-        String currentUserId = SpringSecurityUtil.getCurrentUsername();
+        String currentUserId =SpringSecurityUtil.getCurrentUsername();
         long currentTime=new Date().getTime();
         projectEntity.setLastUpdatedBy(currentUserId);
         projectEntity.setLastUpdateDate(new java.sql.Date(currentTime));

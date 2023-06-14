@@ -11,7 +11,7 @@ const fetchProjectInfo = (id) => {
     id
   }
   $.ajax({
-    url: API_BASE_URL + '/queryProjectList',
+    url: API_BASE_URL +  '/queryProjectList',
     type: "POST",
     data: JSON.stringify(params),
     dataType: "json",
@@ -20,7 +20,7 @@ const fetchProjectInfo = (id) => {
       let info = res.data[0]
       console.log(info, 'res')
       $('#projectName').text(info.projectName)
-      $('#createTime').text(info.createDate)
+      $('#createTime').text(info.creationDate)
       $('#projectDescription').text(info.projectContent)
     }
   })

@@ -19,12 +19,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.net.http.HttpResponse;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.NavigableMap;
+import java.util.Optional;
+import java.util.ServiceLoader;
 
 @RestController
-@RequestMapping("/project/")
 @Api(tags = "项目API")
 public class ProjectController {
     private final static Logger logger= LoggerFactory.getLogger(
@@ -32,7 +34,7 @@ public class ProjectController {
     @Resource
     ProjectService projectService;
 
-    @GetMapping("/query")
+    @PostMapping("/queryProjectList")
     @ApiOperation(value = "多条件模糊查询项目")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id",value = "id:字符串严格等于",dataTypeClass = String.class),
@@ -45,11 +47,12 @@ public class ProjectController {
             @ApiImplicitParam(name = "lastUpdateDate",value = "最后一次修改当天:等于YYYY-MM-DD",dataTypeClass = String.class)
     })
     @ApiResponse(responseCode = "200",description = "OK",content = @Content(mediaType = "application/json", schema = @Schema(implementation = HttpResponseEntity.class)))
-    HttpResponseEntity queryProjectList(ProjectEntity projectEntity){
-        return projectService.queryProjectList(projectEntity);
+    HttpResponseEntity queryProjectList(@RequestBody Optional<ProjectEntity> projectEntity){
+        ProjectEntity project =projectEntity.orElseGet(ProjectEntity::new);
+        return projectService.queryProjectList(project);
     }
 
-    @PutMapping("/addProject")
+    @PostMapping("/addProjectInfo")
     @ApiOperation(value = "添加项目信息")
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "OK"),
@@ -61,7 +64,7 @@ public class ProjectController {
             @ApiImplicitParam(name = "projectName",value = "projectName",required = true,dataTypeClass = String.class),
             @ApiImplicitParam(name = "projectContent",value = "projectContent",required = true,dataTypeClass = String.class)
     })
-    HttpResponseEntity addProjectInfo(ProjectEntity project){
+    HttpResponseEntity addProjectInfo(@RequestBody ProjectEntity project){
         if(!project.integrityCheck())
             return HttpResponseEntityFactory.get403();
         else
@@ -72,14 +75,14 @@ public class ProjectController {
             }
     }
 
-    @PatchMapping("/modifyProject")
+    @PostMapping("/modifyProjectInfo")
     @ApiOperation(value = "根据ID修改项目信息")
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "OK"),
             @ApiResponse(responseCode = "400",description = "修改失败,ID是否正确？")
     })
     @ApiImplicitParam(name = "id",value = "项目id",required = true,dataTypeClass = String.class)
-    HttpResponseEntity modifyProjectInfo(ProjectEntity project){
+    HttpResponseEntity modifyProjectInfo(@RequestBody ProjectEntity project){
         try {
             return projectService.modifyProjectInfo(project);
         }catch (SQLException e){
@@ -88,14 +91,15 @@ public class ProjectController {
     }
 
 
-    @DeleteMapping("/deleteProject")
+    @PostMapping("/deleteProjectById")
     @ApiOperation(value = "根据ID删除项目")
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "OK"),
             @ApiResponse(responseCode = "400",description = "删除失败，ID是否正确？")
     })
     @ApiImplicitParam(name = "id",value = "项目id",required = true,dataTypeClass = String.class)
-    HttpResponseEntity deleteProjectById(ProjectEntity project){
+    HttpResponseEntity deleteProjectById(@RequestBody ProjectEntity project){
+
         try {
             return projectService.deleteProjectById(project);
         }catch (SQLException e){
