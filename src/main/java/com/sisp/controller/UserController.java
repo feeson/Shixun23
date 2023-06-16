@@ -60,7 +60,7 @@ public class UserController {
 
             if (CollectionUtils.isEmpty(hasUsers)) {
                 httpResponseEntity.setCode("403");
-                httpResponseEntity.setData(hasUsers.get(0));
+//                httpResponseEntity.setData(hasUsers.get(0));
                 httpResponseEntity.setMessage("无用户信息");
             } else {
                 httpResponseEntity.setCode("200");

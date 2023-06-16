@@ -17,6 +17,7 @@ public class UserService {
         List<UserEntity> result = userEntityMapper.selectUserInfo(userEntity);
         return result;
     }
+
     public List<UserEntity> queryUserList(UserEntity userEntity) {
         List<UserEntity> result = userEntityMapper.queryUserList(userEntity);
         return result;
@@ -24,7 +25,10 @@ public class UserService {
 
     public int addUserInfo(UserEntity userEntity) {
         userEntity.setId(UUIDUtil.getUUID());
-        int userResult = userEntityMapper.insert(userEntity);
+        int userResult = 0;
+        try {
+            userResult = userEntityMapper.insert(userEntity);
+        } catch (Exception e) {}
         if (userResult != 0) {
             return 3;
         } else {
@@ -42,9 +46,5 @@ public class UserService {
         return userResult;
     }
 
-//    public int deleteUserinfo(UserEntity userEntity) {
-//        int userResult = userEntityMapper.deleteUserinfo(userEntity);
-//        return userResult;
-//    }
 
 }

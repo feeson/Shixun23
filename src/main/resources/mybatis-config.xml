@@ -13,7 +13,7 @@
                 <property name="url"
                           value="jdbc:mysql://localhost:3306/ShiXun23?serverTimezone=Asia/Shanghai&amp;characterEncoding=utf-8"/>
                 <property name="username" value="root"/>
-                <property name="password" value="feeson"/>
+                <property name="password" value="200355lyx"/>
             </dataSource>
         </environment>
     </environments>
