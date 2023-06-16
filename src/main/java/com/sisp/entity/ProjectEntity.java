@@ -34,12 +34,11 @@ public class ProjectEntity {
     private Date lastUpdateDate;
 
     public boolean integrityCheck(){
-//        if (userId==null||userId.trim().equals(""))
-//            return false;
-//        if (projectName==null||projectName.trim().equals(""))
-//            return false;
-//        return projectContent != null && !projectContent.trim().equals("");
-        return true;
+        if (userId==null||userId.trim().equals(""))
+            return false;
+        if (projectName==null||projectName.trim().equals(""))
+            return false;
+        return projectContent != null && !projectContent.trim().equals("");
     }
 
     @Override
