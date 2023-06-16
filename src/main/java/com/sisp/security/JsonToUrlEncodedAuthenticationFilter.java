@@ -1,8 +1,6 @@
 package com.sisp.security;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.MediaType;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -23,7 +21,7 @@ public class JsonToUrlEncodedAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private static class RequestWrapper extends HttpServletRequestWrapper {
+    static class RequestWrapper extends HttpServletRequestWrapper {
         private final Map<String, Object> requestBody;
 
         public RequestWrapper(HttpServletRequest request, Map<String, Object> requestBody) {

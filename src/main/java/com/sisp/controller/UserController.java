@@ -1,9 +1,11 @@
 package com.sisp.controller;
 
-import com.sisp.entity.dto.HttpResponseEntity;
 import com.sisp.entity.UserEntity;
+import com.sisp.entity.dto.HttpResponseEntity;
 import com.sisp.service.UserService;
 import com.sisp.utils.SpringSecurityUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
+    private final static Logger logger= LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity userLogin(@RequestBody UserEntity userEntity) {
@@ -45,7 +48,7 @@ public class UserController {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return httpResponseEntity;
@@ -69,7 +72,7 @@ public class UserController {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return httpResponseEntity;
@@ -92,7 +95,7 @@ public class UserController {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return httpResponseEntity;
@@ -115,7 +118,7 @@ public class UserController {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return httpResponseEntity;
@@ -138,7 +141,7 @@ public class UserController {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return httpResponseEntity;

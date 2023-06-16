@@ -1,7 +1,6 @@
 package com.sisp.entity.dto;
 
 import lombok.Data;
-import org.springframework.util.Assert;
 
 /**
  * @Author: lucy

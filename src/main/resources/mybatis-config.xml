@@ -19,6 +19,6 @@
     </environments>
     <mappers>
         <mapper resource="mapper/UserEntityMapper.xml"/>
-        <mapper class="com.sisp.Dao.ProjectEntityMapper"/>
+        <mapper class="com.sisp.dao.ProjectEntityMapper"/>
     </mappers>
 </configuration>

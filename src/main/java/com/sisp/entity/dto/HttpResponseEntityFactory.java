@@ -1,6 +1,9 @@
 package com.sisp.entity.dto;
 
 public class HttpResponseEntityFactory {
+    HttpResponseEntityFactory(){
+        throw new IllegalStateException("Utility class");
+    }
     public static HttpResponseEntity get200(){
         HttpResponseEntity httpResponseEntity=new HttpResponseEntity();
         httpResponseEntity.setCode("200");

@@ -12,25 +12,19 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.apache.ibatis.annotations.Delete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.net.http.HttpResponse;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.NavigableMap;
 import java.util.Optional;
-import java.util.ServiceLoader;
 
 @RestController
 @Api(tags = "项目API")
 public class ProjectController {
-    private final static Logger logger= LoggerFactory.getLogger(
-            ProjectController.class);
     @Resource
     ProjectService projectService;
 

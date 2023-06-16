@@ -1,7 +1,6 @@
 package com.sisp;
 
-import com.sisp.Dao.UserEntityMapper;
-import com.sisp.entity.ProjectEntity;
+import com.sisp.dao.UserEntityMapper;
 import com.sisp.entity.UserEntity;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
