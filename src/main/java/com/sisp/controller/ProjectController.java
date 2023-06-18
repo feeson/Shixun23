@@ -12,19 +12,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.apache.ibatis.annotations.Delete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.net.http.HttpResponse;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.NavigableMap;
 import java.util.Optional;
-import java.util.ServiceLoader;
 
 @RestController
 @Api(tags = "项目API")
@@ -52,6 +46,7 @@ public class ProjectController {
         return projectService.queryProjectList(project);
     }
 
+
     @PostMapping("/addProjectInfo")
     @ApiOperation(value = "添加项目信息")
     @ApiResponses({
@@ -65,7 +60,7 @@ public class ProjectController {
             @ApiImplicitParam(name = "projectContent",value = "projectContent",required = true,dataTypeClass = String.class)
     })
     HttpResponseEntity addProjectInfo(@RequestBody ProjectEntity project){
-        if(!project.integrityCheck())
+        if(!project.isProjectNameContentValid())
             return HttpResponseEntityFactory.get403();
         else
             try {

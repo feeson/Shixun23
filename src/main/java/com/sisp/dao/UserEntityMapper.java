@@ -1,8 +1,7 @@
-package com.sisp.Dao;
+package com.sisp.dao;
 
 import com.sisp.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

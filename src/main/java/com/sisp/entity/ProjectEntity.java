@@ -33,12 +33,8 @@ public class ProjectEntity {
     @Column(name = "lastUpdateDate",nullable = false)
     private Date lastUpdateDate;
 
-    public boolean integrityCheck(){
-        if (userId==null||userId.trim().equals(""))
-            return false;
-        if (projectName==null||projectName.trim().equals(""))
-            return false;
-        return projectContent != null && !projectContent.trim().equals("");
+    public boolean isProjectNameContentValid(){
+        return projectName != null && !projectName.isEmpty() && projectContent != null && !projectContent.isEmpty();
     }
 
     @Override

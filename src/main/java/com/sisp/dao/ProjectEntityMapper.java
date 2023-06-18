@@ -1,4 +1,4 @@
-package com.sisp.Dao;
+package com.sisp.dao;
 
 import com.sisp.entity.ProjectEntity;
 import org.apache.ibatis.annotations.*;

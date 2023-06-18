@@ -1,11 +1,13 @@
 package com.sisp.service;
 
+import com.sisp.utils.SpringSecurityUtil;
 import com.sisp.utils.UUIDUtil;
-import com.sisp.Dao.UserEntityMapper;
+import com.sisp.dao.UserEntityMapper;
 import com.sisp.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,8 +27,15 @@ public class UserService {
 
     public int addUserInfo(UserEntity userEntity) {
         userEntity.setId(UUIDUtil.getUUID());
+        String currentUsername = SpringSecurityUtil.getCurrentUsername();
+        long currentTime = new Date().getTime();
         int userResult = 0;
         try {
+            userEntity.setStatus("1");
+            userEntity.setCreatedBy(currentUsername);
+            userEntity.setLastUpdatedBy(currentUsername);
+            userEntity.setCreationDate(new Date(currentTime));
+            userEntity.setLastUpdateDate(new Date(currentTime));
             userResult = userEntityMapper.insert(userEntity);
         } catch (Exception e) {}
         if (userResult != 0) {
