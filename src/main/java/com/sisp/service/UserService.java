@@ -1,11 +1,13 @@
 package com.sisp.service;
 
+import com.sisp.utils.SpringSecurityUtil;
 import com.sisp.utils.UUIDUtil;
 import com.sisp.dao.UserEntityMapper;
 import com.sisp.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,6 +19,7 @@ public class UserService {
         List<UserEntity> result = userEntityMapper.selectUserInfo(userEntity);
         return result;
     }
+
     public List<UserEntity> queryUserList(UserEntity userEntity) {
         List<UserEntity> result = userEntityMapper.queryUserList(userEntity);
         return result;
@@ -24,7 +27,17 @@ public class UserService {
 
     public int addUserInfo(UserEntity userEntity) {
         userEntity.setId(UUIDUtil.getUUID());
-        int userResult = userEntityMapper.insert(userEntity);
+        String currentUsername = SpringSecurityUtil.getCurrentUsername();
+        long currentTime = new Date().getTime();
+        int userResult = 0;
+        try {
+            userEntity.setStatus("1");
+            userEntity.setCreatedBy(currentUsername);
+            userEntity.setLastUpdatedBy(currentUsername);
+            userEntity.setCreationDate(new Date(currentTime));
+            userEntity.setLastUpdateDate(new Date(currentTime));
+            userResult = userEntityMapper.insert(userEntity);
+        } catch (Exception e) {}
         if (userResult != 0) {
             return 3;
         } else {
@@ -42,9 +55,5 @@ public class UserService {
         return userResult;
     }
 
-//    public int deleteUserinfo(UserEntity userEntity) {
-//        int userResult = userEntityMapper.deleteUserinfo(userEntity);
-//        return userResult;
-//    }
 
 }

@@ -105,6 +105,9 @@
         SELECT *
         FROM user_info
         WHERE status = "1"
+        <if test="username!=null">
+            AND username LIKE CONCAT('%',#{username},'%')
+        </if>
     </select>
 
 </mapper>
