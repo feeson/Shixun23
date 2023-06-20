@@ -18,19 +18,19 @@ public class ProjectEntity {
     @GeneratedValue(generator = "UUID.randomUUID")
     @Column(name = "id",nullable = false)
     private String id;
-    @Column(name = "userId",nullable = false)
+    @Column(name = "user_id",nullable = false)
     private String userId;
-    @Column(name = "projectName",nullable = false)
+    @Column(name = "project_name",nullable = false)
     private String projectName;
-    @Column(name = "projectContent",nullable = false)
+    @Column(name = "project_content",nullable = false)
     private String projectContent;
-    @Column(name = "createdBy",nullable = false)
+    @Column(name = "created_by",nullable = false)
     private String createdBy;
-    @Column(name = "creationDate",nullable = false)
+    @Column(name = "creation_date",nullable = false)
     private Date creationDate;
-    @Column(name = "lastUpdatedBy",nullable = false)
+    @Column(name = "last_updated_by",nullable = false)
     private String lastUpdatedBy;
-    @Column(name = "lastUpdateDate",nullable = false)
+    @Column(name = "last_update_date",nullable = false)
     private Date lastUpdateDate;
 
     public boolean isProjectNameContentValid(){

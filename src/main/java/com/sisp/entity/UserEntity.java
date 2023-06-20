@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: lucy
@@ -23,19 +24,19 @@ public class UserEntity implements Serializable {
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "startTime")
+    @Column(name = "start_time")
     private Date startTime;
-    @Column(name = "stopTime")
+    @Column(name = "stop_time")
     private Date stopTime;
     @Column(name = "status")
     private String status;
-    @Column(name = "createdBy")
+    @Column(name = "created_by")
     private String createdBy;
-    @Column(name = "creationDate")
+    @Column(name = "creation_date")
     private Date creationDate;
-    @Column(name = "lastUpdatedBy")
+    @Column(name = "last_updated_by")
     private String lastUpdatedBy;
-    @Column(name = "lastUpdateDate")
+    @Column(name = "last_update_date")
     private Date lastUpdateDate;
 
     @Override
