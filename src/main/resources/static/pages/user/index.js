@@ -31,7 +31,7 @@ const fetchUserList = () => {
             <td>${item.startTime}</td>
             <td>${item.stopTime}</td>
             <td>
-              <button type="button" class="btn btn-link">重置密码</button>
+              <button type="button" class="btn btn-link" onclick="handleEdit('${item.id}')">重置密码</button>
               <button type="button" class="btn btn-link" onclick="handleEdit('${item.id}')">编辑</button>
               <button type="button" class="btn btn-link btn-red">关闭</button>
               <button type="button" class="btn btn-link btn-red" onclick="deleteUser('${item.id}')">删除</button>

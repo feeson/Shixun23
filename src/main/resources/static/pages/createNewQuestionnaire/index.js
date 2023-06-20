@@ -19,3 +19,8 @@ onload = () => {
     todayBtn: true // 显示今日按钮
   })
 }
+
+const onCreate = () => {
+  location.href = "/pages/designQuestionnaire/index.html"
+}
+
