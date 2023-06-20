@@ -34,7 +34,7 @@ public class ProjectEntity {
     private Date lastUpdateDate;
 
     public boolean isProjectNameContentValid(){
-        return projectName != null && !projectName.isEmpty() && projectContent != null && !projectContent.isEmpty();
+        return projectName != null && projectContent != null;
     }
 
     @Override
