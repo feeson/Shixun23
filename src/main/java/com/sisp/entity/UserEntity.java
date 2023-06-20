@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -24,9 +25,9 @@ public class UserEntity implements Serializable {
     @Column(name = "password")
     private String password;
     @Column(name = "startTime")
-    private Date startTime;
+    private Timestamp startTime;
     @Column(name = "stopTime")
-    private Date stopTime;
+    private Timestamp stopTime;
     @Column(name = "status")
     private String status;
     @Column(name = "createdBy")
