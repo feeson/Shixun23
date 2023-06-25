@@ -20,7 +20,36 @@ onload = () => {
   })
 }
 
+const putProjectName = () => {
+  // 获得所有的项目名，然后填入下拉列表中，
+  let projectId = $util.getPageParam('createQuestionnaire')
+
+}
+
 const onCreate = () => {
-  location.href = "/pages/designQuestionnaire/index.html"
+  let params = {
+    createdBy: $util.getItem('userInfo').username,
+    lastUpdatedBy: $util.getItem('userInfo').username,
+    Name: $('#projectName').val(),
+    projectContent: $('#projectDescribe').val()
+  }
+  if (!params.projectName) return alert('项目名称不能为空！')
+  if (!params.projectContent) return alert('项目描述不能为空！')
+  $.ajax({
+    url: API_BASE_URL + '/addQuestionnaire',
+    type: "POST",
+    data: JSON.stringify(params),
+    dataType: "json",
+    contentType: "application/json",
+    success(res) {
+      if (res.code === '200') {
+        // $util.setItem('userInfo', res.data)
+        location.href = "/pages/designQuestionnaire/index.html"
+      } else {
+        alert(res.message)
+      }
+    }
+  })
+  // location.href = "/pages/designQuestionnaire/index.html"
 }
 

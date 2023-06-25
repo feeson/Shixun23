@@ -56,4 +56,12 @@ public class QuestionnaireEntity {
 
     @Transient
     private List<QuestionEntity> questions;
+
+    public boolean isQuestionnaireValid() {
+        return questionnaireName != null
+               && questionnaireDescription != null
+//               && releaseTime != null
+//               && accessLink != null
+                ;
+    }
 }

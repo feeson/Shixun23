@@ -4,6 +4,7 @@ onload = () => {
 }
 
 const onCreateTemplate = () => {
+  // let projectId = $util.getPageParam('createQuestionnaire')
   location.href = "/pages/createNewQuestionnaire/index.html"
 }
 

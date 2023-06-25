@@ -12,7 +12,7 @@ import java.sql.Date;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "option")
+@Table(name = "options")
 @Entity
 public class OptionEntity {
     @Id
