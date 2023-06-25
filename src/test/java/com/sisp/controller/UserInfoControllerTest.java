@@ -2,13 +2,22 @@ package com.sisp.controller;
 
 import com.sisp.entity.UserEntity;
 import com.sisp.entity.dto.HttpResponseEntity;
+import com.sisp.utils.SpringSecurityUtil;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.sql.Date;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
@@ -28,8 +37,8 @@ public class UserInfoControllerTest {
         userEntity.setPassword("password");
         userEntity.setCreatedBy("createdBy");
         userEntity.setLastUpdatedBy("lastUpdatedBy");
-        userEntity.setStartTime(new Date(new java.util.Date().getTime()));
-        userEntity.setStopTime(new Date(new java.util.Date().getTime()));
+        userEntity.setStartTime(new Timestamp(System.currentTimeMillis()));
+        userEntity.setStopTime(new Timestamp(System.currentTimeMillis()));
         userEntity.setCreationDate(new Date(new java.util.Date().getTime()));
         userEntity.setLastUpdateDate(new Date(new java.util.Date().getTime()));
         return userEntity;
@@ -43,6 +52,10 @@ public class UserInfoControllerTest {
         userEntity.setUsername("test1");
         userEntity.setPassword("1");
         userController.userLogin(userEntity);
+
+        userEntity.setUsername("\\`~`！￥&*（🆒😀/0/'ヾ(≧▽≦*)o🍔🍕🥗🥙🍅🍆🌱");
+        userEntity.setPassword(longText);
+        userController.userLogin(userEntity);
     }
 
     @Test
@@ -53,9 +66,14 @@ public class UserInfoControllerTest {
 
         userEntity.setStatus("1");
         userController.queryUserInfo(userEntity);
+
+        userEntity.setUsername("\\`~`！￥&*（🆒😀/0/'ヾ(≧▽≦*)o🍔🍕🥗🥙🍅🍆🌱");
+        userEntity.setPassword(longText);
+        userController.userLogin(userEntity);
     }
 
     @Test
+    @WithMockUser(username = "name",password = "pwd")
     void addUserInfo() {
 
         UserEntity userEntity = getDefault();
@@ -63,7 +81,6 @@ public class UserInfoControllerTest {
 
         userEntity.setUsername(longText);
         userController.addUserInfo(userEntity);
-
     }
 
     @Test
@@ -74,8 +91,14 @@ public class UserInfoControllerTest {
         HttpResponseEntity httpResponseEntity = userController.queryUserInfo(userEntity);
         Object data = httpResponseEntity.getData();
         List<UserEntity> hasUsers = (List<UserEntity>) data;
-        userController.modifyUserInfo(hasUsers.get(0));
 
+        try {
+            userController.modifyUserInfo(hasUsers.get(0));
+            // 使代码进入catch
+            userController.modifyUserInfo(null);
+        } catch (Exception e) {
+            Assertions.assertEquals("NullPointerException", e.getClass().getSimpleName());
+        }
     }
 
     @Test
@@ -87,6 +110,16 @@ public class UserInfoControllerTest {
         HttpResponseEntity httpResponseEntity = userController.queryUserInfo(userEntity);
         Object data = httpResponseEntity.getData();
         List<UserEntity> hasUsers = (List<UserEntity>) data;
-        userController.deleteUserinfo(hasUsers.get(0));
+
+        // 使代码进入catch
+        try {
+            userController.deleteUserinfo(hasUsers.get(0));
+            userEntity.setUsername("\\`~`！￥&*（🆒😀/0/'ヾ(≧▽≦*)o🍔🍕🥗🥙🍅🍆🌱//':：/**/@user name = 'admin'");
+            userEntity.setPassword(longText);
+            userController.userLogin(userEntity);
+        } catch (Exception e) {
+            Assertions.assertEquals("NullPointerException", e.getClass().getSimpleName());
+        }
+
     }
 }

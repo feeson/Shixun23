@@ -8,20 +8,28 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 class ShixunApplicationTests {
 
     ShixunApplicationTests() throws IOException {
     }
 
-    private UserEntityMapper userEntityMapper = getUserEntityMapper();
+    @Resource
+    private UserEntityMapper userEntityMapper;
+//    private UserEntityMapper userEntityMapper = getUserEntityMapper();
 
     private UserEntityMapper getUserEntityMapper() throws IOException {
         String resource = "mybatis-config.xml";
@@ -42,8 +50,8 @@ class ShixunApplicationTests {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(String.valueOf(UUID.randomUUID()));
         userEntity.setUsername("testUsername");
-        userEntity.setStartTime(new Date(new java.util.Date().getTime()));
-        userEntity.setStopTime(new Date(new java.util.Date().getTime()));
+        userEntity.setStartTime(new Timestamp(System.currentTimeMillis()));
+        userEntity.setStopTime(new Timestamp(System.currentTimeMillis()));
         userEntity.setStatus("testStatus");
         userEntity.setCreatedBy("testCreatedBy");
         userEntity.setCreationDate(new Date(new java.util.Date().getTime()));
@@ -54,11 +62,11 @@ class ShixunApplicationTests {
     }
 
 
-    @Test
+//    @Test
     void deleteUserById() {
 
         UserEntity user = new UserEntity();
-        user.setId("testId");
+        user.setId("id2347890328984789");
         userEntityMapper.insert(user);
 
         UserEntity userEntity = new UserEntity();

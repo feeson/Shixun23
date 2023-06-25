@@ -1,5 +1,6 @@
 
 spring:
+#  dbdxyjg128
   datasource:
     url: jdbc:mysql://localhost:3306/ShiXun23?useUnicode=true&characterEncoding=utf8
     username: root
