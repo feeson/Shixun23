@@ -26,7 +26,7 @@ public interface QuestionEntityMapper {
     @Select("SELECT * FROM question WHERE id IN (SELECT question_id FROM questionnaire_question WHERE delete_flag = 0 AND questionnaire_id = #{questionnaireId})")
     @ResultMap("questionResultMap")
     List<QuestionEntity> findQuestionsByQuestionnaireId(String questionnaireId);
-    @Select("SELECT * FROM question WHERE parent_id = #{parentId}")
+    @Select("SELECT * FROM question WHERE id IN (SELECT child_option_id FROM question_option WHERE delete_flag = 0 AND parent_question_id = #{parentQuestionId})")
     @ResultMap("questionResultMap")
     List<QuestionEntity> findQuestionsByParentId(String parentId);
 }

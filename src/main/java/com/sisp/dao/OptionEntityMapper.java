@@ -20,7 +20,7 @@ public interface OptionEntityMapper {
     })
     OptionEntity findOptionById(int id);
 
-    @Select("SELECT * FROM option WHERE parent_question_id = #{parentQuestionId}")
+    @Select("SELECT * FROM option WHERE id = (SELECT child_option_id FROM question_option WHERE delete_flag = 0 AND parent_question_id = #{parentQuestionId})")
     @ResultMap("optionResultMap")
     List<OptionEntity> findOptionsByQuestionId(int parentQuestionId);
 }

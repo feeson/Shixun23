@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
@@ -34,7 +35,10 @@ public class QuestionnaireEntity {
     private int surveyType=0;
 
     @Column(name="release_time")
-    private String releaseTime;
+    private Timestamp releaseTime;
+
+    @Column(name = "deadline")
+    private Timestamp deadline;
 
     @Column(name="access_link")
     private String accessLink;
