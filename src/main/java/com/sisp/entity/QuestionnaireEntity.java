@@ -36,6 +36,9 @@ public class QuestionnaireEntity {
     @Column(name="release_time")
     private String releaseTime;
 
+    @Column(name="deadline")
+    private String deadline;
+
     @Column(name="access_link")
     private String accessLink;
 
@@ -60,7 +63,8 @@ public class QuestionnaireEntity {
     public boolean isQuestionnaireValid() {
         return questionnaireName != null
                && questionnaireDescription != null
-//               && releaseTime != null
+               && releaseTime != null
+               && deadline != null
 //               && accessLink != null
                 ;
     }

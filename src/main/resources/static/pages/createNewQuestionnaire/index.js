@@ -1,3 +1,4 @@
+
 onload = () => {
   $('#headerUsername').text($util.getItem('userInfo').username)
   $('#headerDivB').text('创建调查问卷')
@@ -20,21 +21,21 @@ onload = () => {
   })
 }
 
-const putProjectName = () => {
-  // 获得所有的项目名，然后填入下拉列表中，
-  let projectId = $util.getPageParam('createQuestionnaire')
-
-}
 
 const onCreate = () => {
   let params = {
     createdBy: $util.getItem('userInfo').username,
     lastUpdatedBy: $util.getItem('userInfo').username,
-    Name: $('#projectName').val(),
-    projectContent: $('#projectDescribe').val()
+
+    projectId: $util.getItem('projectId'),
+    questionnaireName: $('#surveyName').val(),
+    questionnaireDescription: $('#surveyDescription').val(),
+    surveyType: $util.getItem('surveyType'),
+    releaseTime: $('#startTime').val(),
+    deadline: $('#endTime').val()
   }
-  if (!params.projectName) return alert('项目名称不能为空！')
-  if (!params.projectContent) return alert('项目描述不能为空！')
+  if (!params.questionnaireName) return alert('问卷名称不能为空！')
+  if (!params.questionnaireDescription) return alert('问卷描述不能为空！')
   $.ajax({
     url: API_BASE_URL + '/addQuestionnaire',
     type: "POST",

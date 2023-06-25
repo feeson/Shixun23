@@ -29,6 +29,9 @@ public interface QuestionnaireEntityMapper {
             "<when test='releaseTime != null'>",
             "AND release_time = #{releaseTime}",
             "</when>",
+            "<when test='deadline != null'>",
+            "deadline = #{deadline},",
+            "</when>",
             "<when test='accessLink != null'>",
             "AND access_link = #{accessLink}",
             "</when>",
@@ -56,6 +59,7 @@ public interface QuestionnaireEntityMapper {
             @Result(column = "questionnaire_description", property = "questionnaireDescription"),
             @Result(column = "survey_type", property = "surveyType"),
             @Result(column = "release_time", property = "releaseTime"),
+            @Result(column = "deadline", property = "deadline"),
             @Result(column = "access_link", property = "accessLink"),
             @Result(column = "delete_flag", property = "deleteFlag"),
             @Result(column = "created_by",property = "createdBy"),
@@ -67,8 +71,8 @@ public interface QuestionnaireEntityMapper {
     })
     List<QuestionnaireEntity> queryQuestionnaireList(QuestionnaireEntity questionnaireEntity);
 
-    @Insert("INSERT INTO questionnaire (id, project_id, questionnaire_name, questionnaire_description, survey_type, release_time, access_link, delete_flag, created_by, creation_date, last_updated_by, last_update_date) " +
-            "VALUES (#{id}, #{projectId}, #{questionnaireName}, #{questionnaireDescription}, #{surveyType}, #{releaseTime}, #{accessLink}, #{deleteFlag}, #{createdBy}, #{creationDate}, #{lastUpdatedBy}, #{lastUpdateDate})")
+    @Insert("INSERT INTO questionnaire (id, project_id, questionnaire_name, questionnaire_description, survey_type, release_time, deadline, access_link, delete_flag, created_by, creation_date, last_updated_by, last_update_date) " +
+            "VALUES (#{id}, #{projectId}, #{questionnaireName}, #{questionnaireDescription}, #{surveyType}, #{releaseTime}, #{deadline}, #{accessLink}, #{deleteFlag}, #{createdBy}, #{creationDate}, #{lastUpdatedBy}, #{lastUpdateDate})")
     int insert(QuestionnaireEntity questionnaireEntity);
 
     @Update({
@@ -89,6 +93,9 @@ public interface QuestionnaireEntityMapper {
             "</when>",
             "<when test='releaseTime != null'>",
             "release_time = #{releaseTime},",
+            "</when>",
+            "<when test='deadline != null'>",
+            "deadline = #{deadline},",
             "</when>",
             "<when test='accessLink != null'>",
             "access_link = #{accessLink},",

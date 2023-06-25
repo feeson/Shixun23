@@ -43,7 +43,7 @@ const fetchProjectList = () => {
   })
 }
 
-const onCreatePrject = () => {
+const onCreateProject = () => {
   location.href = "/pages/createProject/index.html"
 }
 
@@ -69,7 +69,6 @@ const onDelProject = (pid) => {
   if (state) {
     let params = {
       id:pid
-      
     }
     //alert(JSON.stringify(params))
     $.ajax({

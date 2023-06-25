@@ -61,7 +61,8 @@ public class QuestionnaireController {
             @ApiImplicitParam(name = "projectId", value = "项目ID", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "questionnaireName", value = "问卷名称", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "questionnaireDescription", value = "问卷描述", required = true, dataTypeClass = String.class),
-//            @ApiImplicitParam(name = "releaseTime", value = "发布时间", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "releaseTime", value = "发布时间", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "deadline", value = "截至时间", required = true, dataTypeClass = String.class),
 //            @ApiImplicitParam(name = "accessLink", value = "访问链接", required = true, dataTypeClass = String.class),
     })
     public HttpResponseEntity addQuestionnaireInfo(@RequestBody QuestionnaireEntity questionnaire) {
