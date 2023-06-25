@@ -32,7 +32,7 @@ public class QuestionnaireEntity {
     private String questionnaireDescription;
 
     @Column(name = "survey_type",nullable = false)
-    private int surveyType=0;
+    private Integer surveyType;
 
     @Column(name="release_time")
     private Timestamp releaseTime;
@@ -40,8 +40,6 @@ public class QuestionnaireEntity {
     @Column(name = "deadline")
     private Timestamp deadline;
 
-    @Column(name="deadline")
-    private String deadline;
 
     @Column(name="access_link")
     private String accessLink;
