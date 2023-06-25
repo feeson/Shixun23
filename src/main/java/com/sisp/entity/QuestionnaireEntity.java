@@ -40,8 +40,6 @@ public class QuestionnaireEntity {
     @Column(name = "deadline")
     private Timestamp deadline;
 
-    @Column(name="deadline")
-    private String deadline;
 
     @Column(name="access_link")
     private String accessLink;

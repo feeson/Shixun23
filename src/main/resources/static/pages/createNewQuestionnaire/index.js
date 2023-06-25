@@ -1,4 +1,3 @@
-
 onload = () => {
   $('#headerUsername').text($util.getItem('userInfo').username)
   $('#headerDivB').text('创建调查问卷')
@@ -20,7 +19,37 @@ onload = () => {
     todayBtn: true // 显示今日按钮
   })
 }
-
+// $(document).ready(onCreate = () => {
+//   let params = {
+//     createdBy: $util.getItem('userInfo').username,
+//     lastUpdatedBy: $util.getItem('userInfo').username,
+//
+//     projectId: $util.getItem('projectId'),
+//     questionnaireName: $('#surveyName').val(),
+//     questionnaireDescription: $('#surveyDescription').val(),
+//     surveyType: $util.getItem('surveyType'),
+//     releaseTime: $('#startTime').val(),
+//     deadline: $('#endTime').val()
+//   }
+//   if (!params.questionnaireName) return alert('问卷名称不能为空！')
+//   if (!params.questionnaireDescription) return alert('问卷描述不能为空！')
+//   $.ajax({
+//     url: API_BASE_URL + '/addQuestionnaire',
+//     type: "POST",
+//     data: JSON.stringify(params),
+//     dataType: "json",
+//     contentType: "application/json",
+//     success(res) {
+//       if (res.code === '200') {
+//         // $util.setItem('userInfo', res.data)
+//         location.href = "/pages/designQuestionnaire/index.html"
+//       } else {
+//         alert(res.message)
+//       }
+//     }
+//   })
+//   // location.href = "/pages/designQuestionnaire/index.html"
+// })
 
 const onCreate = () => {
   let params = {
@@ -34,6 +63,9 @@ const onCreate = () => {
     releaseTime: $('#startTime').val(),
     deadline: $('#endTime').val()
   }
+  // console.log($('#startTime').val())
+  // console.log($('#endTime').val())
+
   if (!params.questionnaireName) return alert('问卷名称不能为空！')
   if (!params.questionnaireDescription) return alert('问卷描述不能为空！')
   $.ajax({

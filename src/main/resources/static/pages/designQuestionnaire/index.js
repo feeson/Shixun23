@@ -494,7 +494,9 @@ const handleModifyTitle = () => {
 
 
 const handleEditFinish = () => {
-  let params = {}
+  let params = {
+  //  传参，传
+  }
   $.ajax({
     url: API_BASE_URL + '/modifyQuestionnaire',
     type: "POST",
