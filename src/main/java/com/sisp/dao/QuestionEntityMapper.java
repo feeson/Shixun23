@@ -21,9 +21,12 @@ public interface QuestionEntityMapper {
             @Result(property = "questions", column = "id", javaType = List.class,
                     many = @Many(select = "com.sisp.dao.QuestionEntityMapper.findQuestionsByParentId"))
     })
-    QuestionEntity findQuestionById(int id);
+    QuestionEntity findQuestionById(String id);
 
+    @Select("SELECT * FROM question WHERE id IN (SELECT question_id FROM questionnaire_question WHERE delete_flag = 0 AND questionnaire_id = #{questionnaireId})")
+    @ResultMap("questionResultMap")
+    List<QuestionEntity> findQuestionsByQuestionnaireId(String questionnaireId);
     @Select("SELECT * FROM question WHERE parent_id = #{parentId}")
     @ResultMap("questionResultMap")
-    List<QuestionEntity> findQuestionsByParentId(int parentId);
+    List<QuestionEntity> findQuestionsByParentId(String parentId);
 }
