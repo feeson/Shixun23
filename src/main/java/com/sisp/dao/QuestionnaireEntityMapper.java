@@ -67,7 +67,7 @@ public interface QuestionnaireEntityMapper {
             @Result(column = "last_updated_by",property = "lastUpdatedBy"),
             @Result(column = "last_update_date",property = "lastUpdateDate"),
             @Result(property = "questions", column = "id", javaType = List.class,
-                    many = @Many(select = "com.sisp.dao.QuestionnaireQuestionEntityMapper.findQuestionsByQuestionnaireId"))
+                    many = @Many(select = "com.sisp.dao.QuestionEntityMapper.findQuestionsByQuestionnaireId"))
     })
     List<QuestionnaireEntity> queryQuestionnaireList(QuestionnaireEntity questionnaireEntity);
 
