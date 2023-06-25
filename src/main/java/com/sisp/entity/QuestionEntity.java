@@ -46,5 +46,5 @@ public class QuestionEntity {
     List<OptionEntity> options;
 
     @Transient
-    List<QuestionEntity> questionEntities;
+    List<QuestionEntity> questions;
 }
