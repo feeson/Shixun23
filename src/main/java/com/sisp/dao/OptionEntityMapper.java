@@ -21,4 +21,7 @@ public interface OptionEntityMapper {
     @Select("SELECT * FROM options WHERE id IN (SELECT child_option_id FROM question_option WHERE delete_flag = 0 AND parent_question_id = #{parentQuestionId})")
     @ResultMap("optionResultMap")
     List<OptionEntity> findOptionsByQuestionId(String parentQuestionId);
+
+    @Insert("INSERT INTO options (id, content, created_by, creation_date, last_updated_by, last_update_date) VALUES (#{id}, #{content}, #{createdBy}, #{creationDate}, #{lastUpdatedBy}, #{lastUpdateDate})")
+    int insertOption(OptionEntity optionEntity);
 }

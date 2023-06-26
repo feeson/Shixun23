@@ -30,4 +30,7 @@ public interface QuestionOptionEntityMapper {
     @Select("SELECT * FROM question_option WHERE id = #{id}")
     @ResultMap("optionResultMap")
     QuestionOptionEntity findOptionById(int id);
+
+    @Insert("INSERT INTO question_option (id, parent_question_id, child_option_id, child_type, delete_flag, created_by, creation_date, last_updated_by, last_update_date) VALUES (#{id}, #{parentQuestionId}, #{childOptionId}, #{childType}, #{deleteFlag}, #{createdBy}, #{creationDate}, #{lastUpdatedBy}, #{lastUpdateDate})")
+    int insertQuestionOption(QuestionOptionEntity questionOptionEntity);
 }

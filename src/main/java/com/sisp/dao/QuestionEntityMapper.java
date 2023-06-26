@@ -30,4 +30,10 @@ public interface QuestionEntityMapper {
     @Select("SELECT * FROM question WHERE id IN (SELECT child_option_id FROM question_option WHERE delete_flag = 0 AND parent_question_id = #{parentQuestionId})")
     @ResultMap("questionResultMap")
     List<QuestionEntity> findQuestionsByParentId(String parentId);
+
+    @Insert("INSERT INTO question (id, type, content, required_flag, created_by, creation_date, last_updated_by, last_update_date) VALUES (#{id}, #{type}, #{content}, #{requiredFlag}, #{createdBy}, #{creationDate}, #{lastUpdatedBy}, #{lastUpdateDate})")
+    int insertQuestion(QuestionEntity questionEntity);
+
+    @Select("SELECT COUNT(*) FROM question WHERE id = #{id}")
+    int queryQuestionExist(QuestionEntity questionEntity);
 }

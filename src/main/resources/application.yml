@@ -1,10 +1,10 @@
-
+data:
+  accessQuestionnaireUrl: localhost:8085
 spring:
-#  dbdxyjg128
   datasource:
     url: jdbc:mysql://localhost:3306/ShiXun23?useUnicode=true&characterEncoding=utf8
     username: root
-    password: 200355lyx
+    password: feeson
   security:
     form-login:
       login-page: /login/login

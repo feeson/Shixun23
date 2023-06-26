@@ -45,7 +45,7 @@ public class QuestionnaireEntity {
     private String accessLink;
 
     @Column(name="delete_flag",nullable = false)
-    private int deleteFlag=0;
+    private Integer deleteFlag;
 
     @Column(name="created_by",nullable = false)
     private String createdBy;
