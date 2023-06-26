@@ -44,7 +44,7 @@ public class QuestionnaireService {
             logger.error(e.getMessage());
             throw new SQLException("插入失败");
         }
-        return HttpResponseEntityFactory.get200();
+        return HttpResponseEntityFactory.get200(questionnaireEntity);
     }
 
     @Transactional

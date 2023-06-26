@@ -1,6 +1,18 @@
-let questionnaireTitle = '问卷标题'
-let questionnaireDescription = '问卷说明'
+let questionnaireTitle
+let questionnaireDescription
+let params
 const problem = []
+let allQuestions = []
+// let oneQuestion = {}
+
+onload = () => {
+  params = $util.getItem('currentQuestionnaire')
+  questionnaireTitle = params.questionnaireName
+  questionnaireDescription = params.questionnaireDescription
+
+  // $('#questionnaire-title')[0].value = questionnaireTitle
+  // $('#questionnaire-description')[0].value = questionnaireDescription
+}
 
 /**
  * 添加问题
@@ -58,8 +70,14 @@ const onInput = (problemIndex, optionIndex, key) => {
 
 const onMustAnswerClick = (problemIndex) => {
   problem[problemIndex].mustAnswer = !problem[problemIndex].mustAnswer
-  if (problem[problemIndex].mustAnswer) $(`#question${problemIndex} #mustAnswer`).text('必答题')
-  else $(`#question${problemIndex} #mustAnswer`).text('非必答题')
+  if (problem[problemIndex].mustAnswer) {
+    $(`#question${problemIndex} #mustAnswer`).text('必答题')
+    // allQuestions[problemIndex].requiredFlag = 0
+  }
+  else {
+    $(`#question${problemIndex} #mustAnswer`).text('非必答题')
+    // allQuestions[problemIndex].requiredFlag = 1
+  }
 }
 
 const cancelEdit = (problemIndex) => {
@@ -160,7 +178,14 @@ const handleDelete = (problemIndex) => {
   problem.splice(problemIndex, 1)
 }
 
+/**
+ * 单选
+* */
 const handleAddSingleChoice = () => {
+  // oneQuestion.id = problem.length
+  // allQuestions.push(oneQuestion)
+
+
   let ele = `
     <div class="question" id="question${problem.length}" data-type="1" data-problemIndex="${problem.length}">
       <div class="top">
@@ -223,8 +248,36 @@ const singleChoiceEditFinish = (problemIndex) => {
       </div>
     `)
   })
+
+  // 这是一定会有的
+  let oneQuestion = {}
+  oneQuestion.content = problem[problemIndex].problemName
+  oneQuestion.requiredFlag = problem[problemIndex].mustAnswer ? 0 : 1
+  oneQuestion.createdBy = params.createdBy
+  oneQuestion.creationDate = params.creationDate
+  oneQuestion.lastUpdatedBy = params.lastUpdatedBy
+  oneQuestion.lastUpdateDate = params.lastUpdateDate
+  oneQuestion.options = []
+  oneQuestion.type = 0
+
+  problem[problemIndex].option.forEach(element => {
+    let op = {}
+    op.content = element.chooseTerm
+    op.createdBy = params.createdBy
+    op.creationDate = params.creationDate
+    op.lastUpdatedBy = params.lastUpdatedBy
+    op.lastUpdateDate = params.lastUpdateDate
+
+    oneQuestion.options.push(op)
+  })
+
+  allQuestions.push(oneQuestion)
 }
 
+
+/**
+ * 多选
+ * */
 const handleAddMultipleChoice = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="2" data-problemIndex="${problem.length}">
@@ -288,8 +341,36 @@ const multipleChoiceEditFinish = (problemIndex) => {
       </div>
     `)
   })
+
+  // 这是一定会有的
+  let oneQuestion = {}
+  oneQuestion.content = problem[problemIndex].problemName
+  oneQuestion.requiredFlag = problem[problemIndex].mustAnswer ? 0 : 1
+  oneQuestion.createdBy = params.createdBy
+  oneQuestion.creationDate = params.creationDate
+  oneQuestion.lastUpdatedBy = params.lastUpdatedBy
+  oneQuestion.lastUpdateDate = params.lastUpdateDate
+  oneQuestion.options = []
+  oneQuestion.type = 1
+
+  problem[problemIndex].option.forEach(element => {
+    let op = {}
+    op.content = element.chooseTerm
+    op.createdBy = params.createdBy
+    op.creationDate = params.creationDate
+    op.lastUpdatedBy = params.lastUpdatedBy
+    op.lastUpdateDate = params.lastUpdateDate
+
+    oneQuestion.options.push(op)
+  })
+
+  allQuestions.push(oneQuestion)
 }
 
+
+/**
+ * 填空
+ * */
 const handleAddFillBlanks = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="3" data-problemIndex="${problem.length}">
@@ -319,8 +400,24 @@ const fillBlanksEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom2`).html(`
     <div style="border: 1px solid #CCCCCC; width: 50%; height: 70px;"></div>
   `)
+
+  // 这是一定会有的
+  let oneQuestion = {}
+  oneQuestion.content = problem[problemIndex].problemName
+  oneQuestion.requiredFlag = problem[problemIndex].mustAnswer ? 0 : 1
+  oneQuestion.createdBy = params.createdBy
+  oneQuestion.creationDate = params.creationDate
+  oneQuestion.lastUpdatedBy = params.lastUpdatedBy
+  oneQuestion.lastUpdateDate = params.lastUpdateDate
+  oneQuestion.type = 2
+
+  allQuestions.push(oneQuestion)
 }
 
+
+/**
+ * 矩阵
+ * */
 const handleAddMatrix = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="4" data-problemIndex="${problem.length}">
@@ -407,9 +504,54 @@ const matrixEditFinish = (problemIndex) => {
       <th>${item.chooseTerm}</th>
     `)
   })
-  
+
+  // 这是一定会有的
+  let oneQuestion = {}
+  oneQuestion.content = problem[problemIndex].problemName
+  oneQuestion.requiredFlag = problem[problemIndex].mustAnswer ? 0 : 1
+  oneQuestion.createdBy = params.createdBy
+  oneQuestion.creationDate = params.creationDate
+  oneQuestion.lastUpdatedBy = params.lastUpdatedBy
+  oneQuestion.lastUpdateDate = params.lastUpdateDate
+  oneQuestion.questions = []
+  oneQuestion.type = 3
+
+  const titleStr = problem[problemIndex].leftTitle
+  let quesTitles = titleStr.split(",")
+  // 每个子question都是使用这个option
+  let quesOptions = []
+  problem[problemIndex].option.forEach(element => {
+    let op = {}
+    op.content = element.chooseTerm
+    op.createdBy = params.createdBy
+    op.creationDate = params.creationDate
+    op.lastUpdatedBy = params.lastUpdatedBy
+    op.lastUpdateDate = params.lastUpdateDate
+
+    quesOptions.push(op)
+  })
+
+  for (let i = 0; i < quesTitles.length; i++) {
+    let ques = {}
+    ques.content = quesTitles
+    ques.requiredFlag = 0
+    ques.createdBy = params.createdBy
+    ques.creationDate = params.creationDate
+    ques.lastUpdatedBy = params.lastUpdatedBy
+    ques.lastUpdateDate = params.lastUpdateDate
+    ques.options = quesOptions
+    ques.type = 0
+
+    oneQuestion.questions.push(ques)
+  }
+
+  allQuestions.push(oneQuestion)
 }
 
+
+/**
+ * 量表
+ * */
 const handleAddGauge = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="5" data-problemIndex="${problem.length}">
@@ -484,19 +626,66 @@ const gaugeEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom2`).append(`
     <div>${problem[problemIndex].option[problem[problemIndex].option.length - 1].chooseTerm}</div>
   `)
+
+
+  // 这是一定会有的
+  let oneQuestion = {}
+  oneQuestion.content = problem[problemIndex].problemName
+  oneQuestion.requiredFlag = problem[problemIndex].mustAnswer ? 0 : 1
+  oneQuestion.createdBy = params.createdBy
+  oneQuestion.creationDate = params.creationDate
+  oneQuestion.lastUpdatedBy = params.lastUpdatedBy
+  oneQuestion.lastUpdateDate = params.lastUpdateDate
+  oneQuestion.questions = []
+  oneQuestion.type = 4
+
+  problem[problemIndex].option.forEach(element => {
+    let ques = {}
+    ques.content = element.chooseTerm
+    ques.options = []
+    ques.createdBy = params.createdBy
+    ques.creationDate = params.creationDate
+    ques.lastUpdatedBy = params.lastUpdatedBy
+    ques.lastUpdateDate = params.lastUpdateDate
+    ques.requiredFlag = 1
+    ques.type = 0
+
+    let op = {}
+    op.content = element.fraction
+    op.createdBy = params.createdBy
+    op.creationDate = params.creationDate
+    op.lastUpdatedBy = params.lastUpdatedBy
+    op.lastUpdateDate = params.lastUpdateDate
+
+    ques.options.push(op)
+
+    oneQuestion.questions.push(ques)
+  })
+
+  allQuestions.push(oneQuestion)
 }
 
+
+/**
+ * 修改问卷的标题和描述
+ * */
 const handleModifyTitle = () => {
   $('#modifyTitleModal').modal('show')
-  $('#questionnaireTitle').val(questionnaireTitle)
-  $('#questionnaireDescription').val(questionnaireDescription)
+  $('#questionnaire-title').val(questionnaireTitle)
+  $('#questionnaire-description').val(questionnaireDescription)
 }
 
 
 const handleEditFinish = () => {
-  let params = {
-  //  传参，传
-  }
+
+
+  // params.questionnaireName = $('#questionnaire-title').val(questionnaireTitle)[0].value
+  // params.questionnaireDescription = $('#questionnaire-description').val(questionnaireDescription)[0].value
+  params.questions = allQuestions
+
+  console.log("problem" + problem)
+  console.log("allQuestions" + allQuestions)
+
   $.ajax({
     url: API_BASE_URL + '/modifyQuestionnaire',
     type: "POST",
@@ -508,3 +697,39 @@ const handleEditFinish = () => {
     }
   })
 }
+
+
+/*
+
+  for (let i = 0; i < problem.length; i++) {
+    // 这是一定会有的
+    oneQuestion.content = problem[i].problemName
+    oneQuestion.requiredFlag = problem[i].mustAnswer ? 0 : 1
+    oneQuestion.createdBy = params.createdBy
+    oneQuestion.creationDate = params.creationDate
+    oneQuestion.lastUpdatedBy = params.lastUpdatedBy
+    oneQuestion.lastUpdateDate = params.lastUpdateDate
+    oneQuestion.options = []
+
+    // 这是不一定会有的
+    if (problem[i].option.length > 0 && problem[i].option[0].chooseTerm != null) {
+      if (problem[i].leftTitle != null) {
+        let titles = []
+      }
+      problem[i].option.forEach(element => {
+        let op = {}
+        op.content = element.chooseTerm
+        op.createdBy = params.createdBy
+        op.creationDate = params.creationDate
+        op.lastUpdatedBy = params.lastUpdatedBy
+        op.lastUpdateDate = params.lastUpdateDate
+
+        oneQuestion.options.push(op)
+      })
+
+    }
+
+    allQuestions.push(oneQuestion)
+  }
+
+* */
