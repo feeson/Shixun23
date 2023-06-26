@@ -75,10 +75,13 @@ public interface QuestionnaireEntityMapper {
             "VALUES (#{id}, #{projectId}, #{questionnaireName}, #{questionnaireDescription}, #{surveyType}, #{releaseTime}, #{deadline}, #{accessLink}, #{deleteFlag}, #{createdBy}, #{creationDate}, #{lastUpdatedBy}, #{lastUpdateDate})")
     int insert(QuestionnaireEntity questionnaireEntity);
 
+    @Select("SELECT COUNT(*) FROM questionnaire WHERE id = #{id}")
+    int queryQuestionnaireExist(QuestionnaireEntity questionnaireEntity);
     @Update({
             "<script>",
             "UPDATE questionnaire",
-            "SET ",
+            "<set> ",
+            "<trim suffixOverrides=','>",
             "<when test='projectId != null'>",
             "project_id = #{projectId},",
             "</when>",
@@ -109,6 +112,8 @@ public interface QuestionnaireEntityMapper {
             "<when test='lastUpdateDate != null'>",
             "last_update_date = #{lastUpdateDate}",
             "</when>",
+            "</trim>",
+            "</set>",
             "WHERE id = #{id}",
             "</script>"
     })

@@ -14,7 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
 import java.sql.SQLException;
@@ -83,7 +85,6 @@ public class QuestionnaireController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "修改失败，ID是否正确？")
     })
-    @ApiImplicitParam(name = "id", value = "问卷ID", required = true, dataTypeClass = String.class)
     public HttpResponseEntity modifyQuestionnaireInfo(@RequestBody QuestionnaireEntity questionnaire) {
         try {
             return questionnaireService.modifyQuestionnaireInfo(questionnaire);
@@ -98,10 +99,23 @@ public class QuestionnaireController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "删除失败，ID是否正确？")
     })
-    @ApiImplicitParam(name = "id", value = "问卷ID", required = true, dataTypeClass = String.class)
     public HttpResponseEntity deleteQuestionnaireById(@RequestBody QuestionnaireEntity questionnaire) {
         try {
             return questionnaireService.deleteQuestionnaireById(questionnaire);
+        } catch (SQLException e) {
+            return HttpResponseEntityFactory.get400();
+        }
+    }
+
+    @PostMapping("/publishQuestionnaire")
+    @ApiOperation(value = "发布问卷")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "发布失败，ID是否正确？")
+    })
+    public HttpResponseEntity publicQuestionnaire(@RequestBody QuestionnaireEntity questionnaire) {
+        try {
+            return questionnaireService.publishQuestionnaire(questionnaire);
         } catch (SQLException e) {
             return HttpResponseEntityFactory.get400();
         }
