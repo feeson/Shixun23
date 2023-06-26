@@ -32,7 +32,7 @@ public class QuestionnaireEntity {
     private String questionnaireDescription;
 
     @Column(name = "survey_type",nullable = false)
-    private int surveyType=0;
+    private Integer surveyType;
 
     @Column(name="release_time")
     private Timestamp releaseTime;
