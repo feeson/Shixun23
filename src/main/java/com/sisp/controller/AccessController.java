@@ -2,6 +2,8 @@ package com.sisp.controller;
 
 import com.sisp.dao.QuestionnaireEntityMapper;
 import com.sisp.entity.QuestionnaireEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import java.io.IOException;
 
 @Controller
 public class AccessController {
+    private final static Logger logger= LoggerFactory.getLogger(AccessController.class);
     @Resource
     private QuestionnaireEntityMapper questionnaireEntityMapper;
     @GetMapping(value = "/pages/answerSheet/{questionnaireId:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}}", produces = MediaType.TEXT_HTML_VALUE)

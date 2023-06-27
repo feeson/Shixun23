@@ -24,4 +24,5 @@ public interface OptionEntityMapper {
 
     @Insert("INSERT INTO options (id, content, created_by, creation_date, last_updated_by, last_update_date) VALUES (#{id}, #{content}, #{createdBy}, #{creationDate}, #{lastUpdatedBy}, #{lastUpdateDate})")
     int insertOption(OptionEntity optionEntity);
+
 }
