@@ -66,8 +66,6 @@ public class QuestionnaireEntity {
         return questionnaireName != null
                && questionnaireDescription != null
                && releaseTime != null
-               && deadline != null
-//               && accessLink != null
-                ;
+               && deadline != null;
     }
 }

@@ -43,11 +43,11 @@ public class QuestionnaireService {
         String currentUserId = SpringSecurityUtil.getCurrentUsername();
         long currentTime = new Date().getTime();
         questionnaireEntity.setId(String.valueOf(UUID.randomUUID()));
+        questionnaireEntity.setDeleteFlag(0);
         questionnaireEntity.setCreatedBy(currentUserId);
         questionnaireEntity.setCreationDate(new java.sql.Date(currentTime));
         questionnaireEntity.setLastUpdatedBy(currentUserId);
         questionnaireEntity.setLastUpdateDate(new java.sql.Date(currentTime));
-        questionnaireEntity.setDeleteFlag(0);
         try {
             questionnaireEntityMapper.insert(questionnaireEntity);
         } catch (Exception e) {

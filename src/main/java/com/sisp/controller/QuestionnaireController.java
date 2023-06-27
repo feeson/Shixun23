@@ -113,7 +113,7 @@ public class QuestionnaireController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "发布失败，ID是否正确？")
     })
-    public HttpResponseEntity publicQuestionnaire(@RequestBody QuestionnaireEntity questionnaire) {
+    public HttpResponseEntity publishQuestionnaire(@RequestBody QuestionnaireEntity questionnaire) {
         try {
             return questionnaireService.publishQuestionnaire(questionnaire);
         } catch (SQLException e) {
