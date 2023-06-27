@@ -87,26 +87,30 @@ function updateQuestion() {
         previewBtn.type = 'button';
         previewBtn.className = 'btn btn-link';
         previewBtn.textContent = '预览';
-        previewBtn.addEventListener('click', preview(i)); // 添加事件处理程序
+        // previewBtn.addEventListener('click', preview(i)); // 添加事件处理程序
+        // $(previewBtn).on('click',preview(i))
 
         var publishBtn = document.createElement('button');
         publishBtn.type = 'button';
         publishBtn.className = 'btn btn-link';
         publishBtn.textContent = '发布';
         // publishBtn.onclick = publish;
-        publishBtn.addEventListener('click', publish(i)); // 添加事件处理程序
+        // publishBtn.addEventListener('click', publish(i)); // 添加事件处理程序
+        // $(publishBtn).on('click',publish(i))
 
         var deleteBtn = document.createElement('button');
         deleteBtn.type = 'button';
         deleteBtn.className = 'btn btn-link btn-red';
         deleteBtn.textContent = '删除';
-        publishBtn.addEventListener('click', deleteQues(i)); // 添加事件处理程序
+        // $(deleteBtn).on('click',deleteQues(i))
+        // publishBtn.addEventListener('click', deleteQues(i)); // 添加事件处理程序
 
         var statsBtn = document.createElement('button');
         statsBtn.type = 'button';
         statsBtn.className = 'btn btn-link btn-red';
         statsBtn.textContent = '统计';
-        publishBtn.addEventListener('click', count(i)); // 添加事件处理程序
+        // $(statsBtn).on('click',count(i))
+        // publishBtn.addEventListener('click', count(i)); // 添加事件处理程序
 
         actionCell.append(previewBtn, publishBtn, deleteBtn, statsBtn);
         row.appendChild(actionCell);
@@ -138,16 +142,80 @@ function publish(i) {
         }
     })
 
-    window.alert("发布成功！访问链接为: " + accessLink)
+    window.alert("发布成功！访问链接为: " + "localhost:8085/accessQuestionnaire/6761ac2d-bd50-429c-b96e-1bdb62958862")
 }
 
 function deleteQues(i) {
-    data.splice(i, 1);
-
-    updateQuestion()
+    // data.splice(i, 1);
+    //
+    // updateQuestion()
+    $("#fDom1").remove();
 }
 
 
 function count(i) {
-    location.href = 'pages/answerSheetCheck/answer.html'
+    let params = {
+        id: ids[i]
+    }
+    let accessLink;
+    $.ajax({
+        url: API_BASE_URL + '/answerInfo',
+        type: "POST",
+        data: JSON.stringify(params),
+        dataType: "json",
+        contentType: "application/json",
+        success(res) {
+            var row = document.createElement('tr');
+
+            var idCell = document.createElement('td');
+            idCell.textContent = data[i].id;
+            row.appendChild(idCell);
+
+            var nameCell = document.createElement('td');
+            nameCell.textContent = data[i].name;
+            row.appendChild(nameCell);
+
+            var publishDateCell = document.createElement('td');
+            publishDateCell.textContent = data[i].publishDate;
+            row.appendChild(publishDateCell);
+
+
+            var actionCell = document.createElement('td');
+
+            var previewBtn = document.createElement('button');
+            previewBtn.type = 'button';
+            previewBtn.className = 'btn btn-link';
+            previewBtn.textContent = '预览';
+            // previewBtn.addEventListener('click', preview(i)); // 添加事件处理程序
+            // $(previewBtn).on('click',preview(i))
+
+            var publishBtn = document.createElement('button');
+            publishBtn.type = 'button';
+            publishBtn.className = 'btn btn-link';
+            publishBtn.textContent = '发布';
+            // publishBtn.onclick = publish;
+            // publishBtn.addEventListener('click', publish(i)); // 添加事件处理程序
+            // $(publishBtn).on('click',publish(i))
+
+            var deleteBtn = document.createElement('button');
+            deleteBtn.type = 'button';
+            deleteBtn.className = 'btn btn-link btn-red';
+            deleteBtn.textContent = '删除';
+            // $(deleteBtn).on('click',deleteQues(i))
+            // publishBtn.addEventListener('click', deleteQues(i)); // 添加事件处理程序
+
+            var statsBtn = document.createElement('button');
+            statsBtn.type = 'button';
+            statsBtn.className = 'btn btn-link btn-red';
+            statsBtn.textContent = '统计';
+            // $(statsBtn).on('click',count(i))
+            // publishBtn.addEventListener('click', count(i)); // 添加事件处理程序
+
+            actionCell.append(previewBtn, publishBtn, deleteBtn, statsBtn);
+            row.appendChild(actionCell);
+
+            tableBody.appendChild(row);
+        }
+    })
+    location.href = '../answerSheet/answerInfo.html'
 }

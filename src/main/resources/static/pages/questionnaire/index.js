@@ -18,28 +18,28 @@ const fetchProjectList = () => {
     dataType: "json",
     contentType: "application/json",
     success(res) {
-      projectList = res.data
-      $('#content').html('')
-
-      res.data.map(item => {
-        $('#content').append(`
-          <div class="list">
-            <div class="list-header">
-              <div>${item.projectName}</div>
-              <div>
-                <button type="button" class="btn btn-link" onclick="onCreateQuestionnaire('${item.id}')">创建问卷</button>
-                <button type="button" class="btn btn-link" onclick="onSeeProject('${item.id}')">查看</button>
-                <button type="button" class="btn btn-link" onclick="onEditProject('${item.id}')">编辑</button>
-                <button type="button" class="btn btn-link" onclick="onDelProject('${item.id}')">删除</button>
-                <button type="button" class="btn btn-link" onclick="onCountProject('${item.id}')">统计</button>
-              </div>
-            </div>
-            <div class="list-footer">
-              <div>暂无调查问卷或问卷已过期</div>
-            </div>
-          </div>
-        `)
-      })
+      // projectList = res.data
+      // $('#content').html('')
+      //
+      // res.data.map(item => {
+      //   $('#content').append(`
+      //     <div class="list">
+      //       <div class="list-header">
+      //         <div>${item.projectName}</div>
+      //         <div>
+      //           <button type="button" class="btn btn-link" onclick="onCreateQuestionnaire('${item.id}')">创建问卷</button>
+      //           <button type="button" class="btn btn-link" onclick="onSeeProject('${item.id}')">查看</button>
+      //           <button type="button" class="btn btn-link" onclick="onEditProject('${item.id}')">编辑</button>
+      //           <button type="button" class="btn btn-link" onclick="onDelProject('${item.id}')">删除</button>
+      //           <button type="button" class="btn btn-link" onclick="onCountProject('${item.id}')">统计</button>
+      //         </div>
+      //       </div>
+      //       <div class="list-footer">
+      //         <div>暂无调查问卷或问卷已过期</div>
+      //       </div>
+      //     </div>
+      //   `)
+      // })
     }
   })
 }
@@ -57,6 +57,11 @@ const onSeeProject = (id) => {
   $util.setPageParam('seeProject', id)
   location.href = "/pages/seeProject/index.html"
 }
+const onSeeProjectf = (id) => {
+  // $util.setPageParam('seeProject', id)
+  location.href = "/pages/seeProject/indexf.html"
+}
+
 
 const onEditProject = (id) => {
   let project = projectList.filter(item => item.id === id)[0]

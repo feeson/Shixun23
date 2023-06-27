@@ -29,8 +29,20 @@ onload = () => {
         }
     })
 }
+function searchQues(flag) {
+    switch (flag){
+        case 0:{
+            $("#meta2").hide();
+            $("#meta3").hide();
+            break;
+        }
+        case 1:{
+            $("#meta2").show()
+            $("#meta3").show();
+            break;
+        }
+    }
 
-function searchQues() {
     let params = {
         projectId: projectId
     }
@@ -56,6 +68,7 @@ function searchQues() {
             updateQuestion()
         }
     })
+
 }
 
 function countStats(i) {
