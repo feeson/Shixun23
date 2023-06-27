@@ -1,0 +1,46 @@
+@startuml
+interface com.sisp.dao.OptionEntityMapper {
+~ OptionEntity findOptionById(String)
+~ List<OptionEntity> findOptionsByQuestionId(String)
+~ int insertOption(OptionEntity)
+}
+interface com.sisp.dao.ProjectEntityMapper {
+~ List<ProjectEntity> queryProjectList(ProjectEntity)
+~ int insert(ProjectEntity)
+~ int updateByPrimaryKeySelective(ProjectEntity)
+~ int deleteProjectById(ProjectEntity)
+}
+interface com.sisp.dao.UserEntityMapper {
+~ int insert(UserEntity)
+~ int deleteUserById(UserEntity)
+~ int updateByPrimaryKeySelective(UserEntity)
+~ List<UserEntity> selectUserInfo(UserEntity)
+~ List<UserEntity> queryUserList(UserEntity)
+}
+interface com.sisp.dao.AnswerEntityMapper {
+~ int insertAnswer(AnswerEntity)
+~ List<AnswerEntity> queryAnswerList(AnswerEntity)
+}
+interface com.sisp.dao.QuestionEntityMapper {
+~ QuestionEntity findQuestionById(String)
+~ List<QuestionEntity> findQuestionsByQuestionnaireId(String)
+~ List<QuestionEntity> findQuestionsByParentId(String)
+~ int insertQuestion(QuestionEntity)
+~ int queryQuestionExist(QuestionEntity)
+}
+interface com.sisp.dao.QuestionnaireEntityMapper {
+~ List<QuestionnaireEntity> queryQuestionnaireList(QuestionnaireEntity)
+~ int insert(QuestionnaireEntity)
+~ int queryQuestionnaireExist(QuestionnaireEntity)
+~ int updateByPrimaryKeySelective(QuestionnaireEntity)
+~ int deleteQuestionnaireById(QuestionnaireEntity)
+}
+interface com.sisp.dao.QuestionnaireQuestionEntityMapper {
+~ int insertQuestionnaireQuestion(QuestionnaireQuestionEntity)
+}
+interface com.sisp.dao.QuestionOptionEntityMapper {
+~ List<QuestionOptionEntity> findOptionsByQuestionId(int)
+~ QuestionOptionEntity findOptionById(int)
+~ int insertQuestionOption(QuestionOptionEntity)
+}
+@enduml

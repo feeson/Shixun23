@@ -1,32 +1,50 @@
 @startuml
-class QuestionnaireController {
-- QuestionnaireService questionnaireService
-+ HttpResponseEntity queryQuestionnaireList(Optional<QuestionnaireEntity>)
-+ HttpResponseEntity addQuestionnaireInfo(QuestionnaireEntity)
-+ HttpResponseEntity modifyQuestionnaireInfo(QuestionnaireEntity)
-+ HttpResponseEntity deleteQuestionnaireById(QuestionnaireEntity)
-+ HttpResponseEntity publicQuestionnaire(QuestionnaireEntity)
-}
-class UserController {
-- UserService userService
-+ HttpResponseEntity userLogin(UserEntity)
-+ HttpResponseEntity queryUserInfo(UserEntity)
-+ HttpResponseEntity addUserInfo(UserEntity)
-+ HttpResponseEntity modifyUserInfo(UserEntity)
-+ HttpResponseEntity deleteUserinfo(UserEntity)
-}
-class ProjectController {
-~ ProjectService projectService
-~ HttpResponseEntity queryProjectList(Optional<ProjectEntity>)
-~ HttpResponseEntity addProjectInfo(ProjectEntity)
-~ HttpResponseEntity modifyProjectInfo(ProjectEntity)
-~ HttpResponseEntity deleteProjectById(ProjectEntity)
-}
-class AccessController {
-- QuestionnaireEntityMapper questionnaireEntityMapper
-+ void handleAccessLink(String,HttpServletRequest,HttpServletResponse)
-}
+class QuestionnaireController {}
+class UserController {}
+class ProjectController {}
+class AccessController {}
 
+class AnswerService {}
+class OptionService {}
+class ProjectService {}
+class QuestionnaireService {}
+class QuestionService {}
+class UserService {}
+
+interface AnswerEntityMapper {}
+interface OptionEntityMapper {}
+interface ProjectEntityMapper {}
+interface QuestionEntityMapper {}
+interface QuestionnaireEntityMapper {}
+interface QuestionnaireQuestionEntityMapper {}
+interface QuestionOptionEntityMapper {}
+interface UserEntityMapper {}
+
+
+UserController --> UserService : 调用服务
+UserService --> UserEntityMapper : 请求数据
+UserEntityMapper --> UserService : 返回数据
+UserService --> UserController : 返回结果
+
+ProjectController --> ProjectService : 调用服务
+ProjectService --> ProjectEntityMapper : 请求数据
+ProjectEntityMapper --> ProjectService : 返回数据
+ProjectService --> ProjectController : 返回结果
+
+QuestionnaireController --> QuestionnaireService : 调用服务
+QuestionnaireService --> QuestionnaireEntityMapper : 请求数据
+QuestionnaireEntityMapper --> QuestionnaireService : 返回数据
+QuestionnaireService --> QuestionnaireController : 返回结果
+
+AccessController --> UserService : 调用服务
+UserService --> UserEntityMapper : 请求数据
+UserEntityMapper --> UserService : 返回数据
+UserService --> UserController : 返回结果
+
+UserController --> UserService : 调用服务
+UserService --> UserEntityMapper : 请求数据
+UserEntityMapper --> UserService : 返回数据
+UserService --> UserController : 返回结果
 
 
 @enduml

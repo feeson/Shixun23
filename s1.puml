@@ -1,0 +1,38 @@
+@startuml
+class com.sisp.controller.QuestionnaireController {
+- {static} Logger logger
+- QuestionnaireService questionnaireService
++ HttpResponseEntity queryQuestionnaireList(Optional<QuestionnaireEntity>)
++ HttpResponseEntity addQuestionnaireInfo(QuestionnaireEntity)
++ HttpResponseEntity modifyQuestionnaireInfo(QuestionnaireEntity)
++ HttpResponseEntity deleteQuestionnaireById(QuestionnaireEntity)
++ HttpResponseEntity publishQuestionnaire(QuestionnaireEntity)
+}
+class com.sisp.controller.AnswerController {
+- {static} Logger logger
+- AnswerService answerService
++ HttpResponseEntity queryAnswerList(Optional<QuestionnaireEntity>)
+}
+class com.sisp.controller.UserController {
+- UserService userService
+- {static} Logger logger
++ HttpResponseEntity userLogin(UserEntity)
++ HttpResponseEntity queryUserInfo(UserEntity)
++ HttpResponseEntity addUserInfo(UserEntity)
++ HttpResponseEntity modifyUserInfo(UserEntity)
++ HttpResponseEntity deleteUserinfo(UserEntity)
+}
+class com.sisp.controller.ProjectController {
+- {static} Logger logger
+~ ProjectService projectService
+~ HttpResponseEntity queryProjectList(Optional<ProjectEntity>)
+~ HttpResponseEntity addProjectInfo(ProjectEntity)
+~ HttpResponseEntity modifyProjectInfo(ProjectEntity)
+~ HttpResponseEntity deleteProjectById(ProjectEntity)
+}
+class com.sisp.controller.AccessController {
+- {static} Logger logger
+- QuestionnaireEntityMapper questionnaireEntityMapper
++ void handleAccessLink(String,HttpServletRequest,HttpServletResponse)
+}
+@enduml
