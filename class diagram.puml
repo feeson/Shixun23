@@ -1,5 +1,14 @@
 @startuml
-class com.sisp.entity.QuestionOptionEntity {
+
+!define MyCustomSkin
+skinparam class {
+    BorderColor DarkSlateGray
+    ArrowColor DarkSlateGray
+    ArrowThickness 2
+}
+
+
+class QuestionOptionEntity {
 - String id
 - String parentQuestionId
 - String childOptionId
@@ -10,13 +19,7 @@ class com.sisp.entity.QuestionOptionEntity {
 - String lastUpdatedBy
 - Date lastUpdateDate
 }
-class com.sisp.entity.dto.HttpResponseEntity {
-- String code
-- Object data
-- String message
-+ T getData(Class<T>)
-}
-class com.sisp.entity.QuestionnaireQuestionEntity {
+class QuestionnaireQuestionEntity {
 - String id
 - String questionnaireId
 - String questionId
@@ -26,39 +29,7 @@ class com.sisp.entity.QuestionnaireQuestionEntity {
 - String lastUpdatedBy
 - Date lastUpdateDate
 }
-class com.sisp.entity.dto.HttpResponseEntityFactory {
-+ {static} HttpResponseEntity get200()
-+ {static} HttpResponseEntity get200(T)
-+ {static} HttpResponseEntity get403()
-+ {static} HttpResponseEntity get400()
-}
-'class com.sisp.entity.UserEntity {
-'- String id
-'- String username
-'- String password
-'- Timestamp startTime
-'- Timestamp stopTime
-'- String status
-'- String createdBy
-'- Date creationDate
-'- String lastUpdatedBy
-'- Date lastUpdateDate
-'+ String toString()
-'}
-'class com.sisp.entity.ProjectEntity {
-'- String id
-'- String userId
-'- String projectName
-'- String projectContent
-'- String createdBy
-'- Date creationDate
-'- String lastUpdatedBy
-'- Date lastUpdateDate
-'+ boolean isProjectNameContentValid()
-'+ boolean equals(Object)
-'+ int hashCode()
-'}
-class com.sisp.entity.OptionEntity {
+class OptionEntity {
 - String id
 - String content
 - String createdBy
@@ -66,7 +37,7 @@ class com.sisp.entity.OptionEntity {
 - String lastUpdatedBy
 - Date lastUpdateDate
 }
-class com.sisp.entity.QuestionnaireEntity {
+class QuestionnaireEntity {
 - String id
 - String projectId
 - String questionnaireName
@@ -83,7 +54,7 @@ class com.sisp.entity.QuestionnaireEntity {
 - List<QuestionEntity> questions
 + boolean isQuestionnaireValid()
 }
-class com.sisp.entity.QuestionEntity {
+class QuestionEntity {
 - String id
 - int type
 - String content
@@ -96,6 +67,12 @@ class com.sisp.entity.QuestionEntity {
 ~ List<QuestionEntity> questions
 }
 
+QuestionnaireEntity "1" --> "*" QuestionEntity : contains
+QuestionEntity "1" --> "*" OptionEntity : has options
+QuestionEntity "*" --> "*" QuestionEntity : has nested questions
+QuestionEntity "*" --> "*" QuestionnaireQuestionEntity : related to
+QuestionEntity "*" --> "*" QuestionOptionEntity : has options
+QuestionnaireQuestionEntity "*" --> "*" QuestionnaireEntity : related to
+QuestionOptionEntity "*" --> "*" OptionEntity : related to
 
-java.io.Serializable <|.. com.sisp.entity.UserEntity
 @enduml

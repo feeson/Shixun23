@@ -1,0 +1,32 @@
+@startuml
+class QuestionnaireController {
+- QuestionnaireService questionnaireService
++ HttpResponseEntity queryQuestionnaireList(Optional<QuestionnaireEntity>)
++ HttpResponseEntity addQuestionnaireInfo(QuestionnaireEntity)
++ HttpResponseEntity modifyQuestionnaireInfo(QuestionnaireEntity)
++ HttpResponseEntity deleteQuestionnaireById(QuestionnaireEntity)
++ HttpResponseEntity publicQuestionnaire(QuestionnaireEntity)
+}
+class UserController {
+- UserService userService
++ HttpResponseEntity userLogin(UserEntity)
++ HttpResponseEntity queryUserInfo(UserEntity)
++ HttpResponseEntity addUserInfo(UserEntity)
++ HttpResponseEntity modifyUserInfo(UserEntity)
++ HttpResponseEntity deleteUserinfo(UserEntity)
+}
+class ProjectController {
+~ ProjectService projectService
+~ HttpResponseEntity queryProjectList(Optional<ProjectEntity>)
+~ HttpResponseEntity addProjectInfo(ProjectEntity)
+~ HttpResponseEntity modifyProjectInfo(ProjectEntity)
+~ HttpResponseEntity deleteProjectById(ProjectEntity)
+}
+class AccessController {
+- QuestionnaireEntityMapper questionnaireEntityMapper
++ void handleAccessLink(String,HttpServletRequest,HttpServletResponse)
+}
+
+
+
+@enduml
