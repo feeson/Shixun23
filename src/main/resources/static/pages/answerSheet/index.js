@@ -2,28 +2,28 @@ onload = () => {
   $('#problem').append(`
     <div class="question" id="question1" data-type="1" data-problemIndex="1">
       <div class="top">
-        <span class="question-title" id="questionTitle">1.单选题</span>
+        <span class="question-title" id="questionTitle">1.test1</span>
         <span class="must-answer" id="mustAnswer">必答题</span>
       </div>
       <div class="bottom">
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
           <label class="radio-inline">
-            <input type="radio" name="chooseTerm">选项1
+            <input type="radio" name="chooseTerm">1
           </label>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
           <label class="radio-inline">
-            <input type="radio" name="chooseTerm">选项2
+            <input type="radio" name="chooseTerm">2
           </label>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
           <label class="radio-inline">
-            <input type="radio" name="chooseTerm">选项3
+            <input type="radio" name="chooseTerm">3
           </label>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
           <label class="radio-inline">
-            <input type="radio" name="chooseTerm">选项4
+            <input type="radio" name="chooseTerm">4
           </label>
         </div>
       </div>
@@ -32,34 +32,45 @@ onload = () => {
   $('#problem').append(`
     <div class="question" id="question1" data-type="1" data-problemIndex="1">
       <div class="top">
-        <span class="question-title" id="questionTitle">2.多选题</span>
-        <span class="must-answer" id="mustAnswer">必答题</span>
+        <span class="question-title" id="questionTitle">2.test2</span>
+        <span class="must-answer" id="mustAnswer">非必答题</span>
       </div>
       <div class="bottom">
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
           <label class="checkbox-inline">
-            <input type="checkbox" name="chooseTerm">选项1
+            <input type="checkbox" name="chooseTerm">1
           </label>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
           <label class="checkbox-inline">
-            <input type="checkbox" name="chooseTerm">选项2
+            <input type="checkbox" name="chooseTerm">2
           </label>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
           <label class="checkbox-inline">
-            <input type="checkbox" name="chooseTerm">选项3
+            <input type="checkbox" name="chooseTerm">3
           </label>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
           <label class="checkbox-inline">
-            <input type="checkbox" name="chooseTerm">选项4
+            <input type="checkbox" name="chooseTerm">4
           </label>
         </div>
       </div>
     </div>
   `)
-  $('#problem').append(`
+
+
+}
+
+$("#commit"). on("click", function  (e) {
+  window.alert("提交完成")
+})
+
+
+/*
+
+$('#problem').append(`
     <div class="question" id="question1" data-type="1" data-problemIndex="1">
       <div class="top">
         <span class="question-title" id="questionTitle">3.填空题</span>
@@ -140,4 +151,5 @@ onload = () => {
       </div>
     </div>
   `)
-}
+
+*/

@@ -1,0 +1,101 @@
+@startuml
+class com.sisp.entity.QuestionOptionEntity {
+- String id
+- String parentQuestionId
+- String childOptionId
+- int childType
+- int deleteFlag
+- String createdBy
+- Date creationDate
+- String lastUpdatedBy
+- Date lastUpdateDate
+}
+class com.sisp.entity.dto.HttpResponseEntity {
+- String code
+- Object data
+- String message
++ T getData(Class<T>)
+}
+class com.sisp.entity.QuestionnaireQuestionEntity {
+- String id
+- String questionnaireId
+- String questionId
+- int deleteFlag
+- String createdBy
+- Date creationDate
+- String lastUpdatedBy
+- Date lastUpdateDate
+}
+class com.sisp.entity.dto.HttpResponseEntityFactory {
++ {static} HttpResponseEntity get200()
++ {static} HttpResponseEntity get200(T)
++ {static} HttpResponseEntity get403()
++ {static} HttpResponseEntity get400()
+}
+'class com.sisp.entity.UserEntity {
+'- String id
+'- String username
+'- String password
+'- Timestamp startTime
+'- Timestamp stopTime
+'- String status
+'- String createdBy
+'- Date creationDate
+'- String lastUpdatedBy
+'- Date lastUpdateDate
+'+ String toString()
+'}
+'class com.sisp.entity.ProjectEntity {
+'- String id
+'- String userId
+'- String projectName
+'- String projectContent
+'- String createdBy
+'- Date creationDate
+'- String lastUpdatedBy
+'- Date lastUpdateDate
+'+ boolean isProjectNameContentValid()
+'+ boolean equals(Object)
+'+ int hashCode()
+'}
+class com.sisp.entity.OptionEntity {
+- String id
+- String content
+- String createdBy
+- Date creationDate
+- String lastUpdatedBy
+- Date lastUpdateDate
+}
+class com.sisp.entity.QuestionnaireEntity {
+- String id
+- String projectId
+- String questionnaireName
+- String questionnaireDescription
+- Integer surveyType
+- Timestamp releaseTime
+- Timestamp deadline
+- String accessLink
+- Integer deleteFlag
+- String createdBy
+- Date creationDate
+- String lastUpdatedBy
+- Date lastUpdateDate
+- List<QuestionEntity> questions
++ boolean isQuestionnaireValid()
+}
+class com.sisp.entity.QuestionEntity {
+- String id
+- int type
+- String content
+- int requiredFlag
+- String createdBy
+- Date creationDate
+- String lastUpdatedBy
+- Date lastUpdateDate
+~ List<OptionEntity> options
+~ List<QuestionEntity> questions
+}
+
+
+java.io.Serializable <|.. com.sisp.entity.UserEntity
+@enduml

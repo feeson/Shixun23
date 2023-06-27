@@ -3,7 +3,8 @@ import { getItem } from "./storage.js"
 
 const whiteList = [
   '/pages/login/index.html',
-  '/pages/answerSheet/index.html'
+  '/pages/answerSheet/index.html',
+  '/pages/answerSheetCheck/index.html'
 ]
 
 export const loginCheck = () => {

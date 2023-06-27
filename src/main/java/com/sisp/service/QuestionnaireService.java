@@ -47,6 +47,7 @@ public class QuestionnaireService {
         questionnaireEntity.setCreationDate(new java.sql.Date(currentTime));
         questionnaireEntity.setLastUpdatedBy(currentUserId);
         questionnaireEntity.setLastUpdateDate(new java.sql.Date(currentTime));
+        questionnaireEntity.setDeleteFlag(0);
         try {
             questionnaireEntityMapper.insert(questionnaireEntity);
         } catch (Exception e) {

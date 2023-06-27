@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>问卷作答情况统计</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+<h1>问卷作答情况统计</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>题目</th>
+        <th>选项A</th>
+        <th>选项B</th>
+        <th>选项C</th>
+        <th>选项D</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>题目1</td>
+        <td id="q1a">0</td>
+        <td id="q1b">0</td>
+        <td id="q1c">0</td>
+        <td id="q1d">0</td>
+    </tr>
+    <tr>
+        <td>题目2</td>
+        <td id="q2a">0</td>
+        <td id="q2b">0</td>
+        <td id="q2c">0</td>
+        <td id="q2d">0</td>
+    </tr>
+    <!-- 添加更多题目的行 -->
+    </tbody>
+</table>
+
+<script>
+    // 模拟问卷数据
+    var questionnaireData = [
+        { q1: 'a', q2: 'b' },
+        { q1: 'b', q2: 'c' },
+        // 添加更多参与者的答案
+    ];
+
+    // 统计作答情况
+    questionnaireData.forEach(function(data) {
+        // 题目1
+        if (data.q1 === 'a') {
+            incrementCount('q1a');
+        } else if (data.q1 === 'b') {
+            incrementCount('q1b');
+        } else if (data.q1 === 'c') {
+            incrementCount('q1c');
+        } else if (data.q1 === 'd') {
+            incrementCount('q1d');
+        }
+
+        // 题目2
+        if (data.q2 === 'a') {
+            incrementCount('q2a');
+        } else if (data.q2 === 'b') {
+            incrementCount('q2b');
+        } else if (data.q2 === 'c') {
+            incrementCount('q2c');
+        } else if (data.q2 === 'd') {
+            incrementCount('q2d');
+        }
+
+        // 继续添加更多题目的统计逻辑
+    });
+
+    // 增加选项的统计计数
+    function incrementCount(cellId) {
+        var cell = document.getElementById(cellId);
+        var count = parseInt(cell.innerText);
+        count++;
+        cell.innerText = count;
+    }
+</script>
+</body>
+</html>
