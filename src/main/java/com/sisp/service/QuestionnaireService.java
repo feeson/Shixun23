@@ -143,4 +143,12 @@ public class QuestionnaireService {
             throw new SQLException("更新失败");
         return HttpResponseEntityFactory.get200();
     }
+
+    @Transactional
+    public HttpResponseEntity queryQuestionnaireByQuestionnaireIdUserId(QuestionnaireEntity questionnaireEntity,UserEntity userEntity) throws SQLException {
+        QuestionnaireEntity questionnaireEntity1 = questionnaireEntityMapper.queryQuestionnaireListByQuestionnaireIdUserId(questionnaireEntity,userEntity);
+        if (questionnaireEntity1==null)
+            return HttpResponseEntityFactory.get400();
+        return HttpResponseEntityFactory.get200(questionnaireEntity1);
+    }
 }
