@@ -3,6 +3,7 @@ class QuestionnaireController {}
 class UserController {}
 class ProjectController {}
 class AccessController {}
+class AnswerController {}
 
 class AnswerService {}
 class OptionService {}
@@ -11,40 +12,59 @@ class QuestionnaireService {}
 class QuestionService {}
 class UserService {}
 
-interface AnswerEntityMapper {}
+interface QuestionOptionEntityMapper {}
 interface OptionEntityMapper {}
-interface ProjectEntityMapper {}
 interface QuestionEntityMapper {}
 interface QuestionnaireEntityMapper {}
 interface QuestionnaireQuestionEntityMapper {}
-interface QuestionOptionEntityMapper {}
+interface AnswerEntityMapper {}
+interface ProjectEntityMapper {}
 interface UserEntityMapper {}
 
 
 UserController --> UserService : 调用服务
 UserService --> UserEntityMapper : 请求数据
+UserEntityMapper <--> UserEntity : 通过注入和映射存取数据
 UserEntityMapper --> UserService : 返回数据
 UserService --> UserController : 返回结果
 
 ProjectController --> ProjectService : 调用服务
 ProjectService --> ProjectEntityMapper : 请求数据
+ProjectEntityMapper <--> ProjectEntity : 通过注入和映射存取数据
 ProjectEntityMapper --> ProjectService : 返回数据
 ProjectService --> ProjectController : 返回结果
 
 QuestionnaireController --> QuestionnaireService : 调用服务
+QuestionnaireService --> QuestionService : 调用服务
+QuestionService --> QuestionnaireService : 返回结果
 QuestionnaireService --> QuestionnaireEntityMapper : 请求数据
+QuestionnaireEntityMapper <--> QuestionnaireEntity : 通过注入和映射存取数据
 QuestionnaireEntityMapper --> QuestionnaireService : 返回数据
+QuestionnaireService --> QuestionnaireQuestionEntityMapper : 请求数据
+QuestionnaireQuestionEntityMapper <--> QuestionnaireQuestionEntity : 通过注入和映射存取数据
+QuestionnaireQuestionEntityMapper --> QuestionnaireService : 返回数据
 QuestionnaireService --> QuestionnaireController : 返回结果
 
-AccessController --> UserService : 调用服务
-UserService --> UserEntityMapper : 请求数据
-UserEntityMapper --> UserService : 返回数据
-UserService --> UserController : 返回结果
+AccessController --> QuestionnaireEntityMapper : 请求数据
+QuestionnaireEntityMapper --> AccessController : 返回数据
 
-UserController --> UserService : 调用服务
-UserService --> UserEntityMapper : 请求数据
-UserEntityMapper --> UserService : 返回数据
-UserService --> UserController : 返回结果
+AnswerController --> AnswerService : 调用服务
+AnswerService --> AnswerEntityMapper : 请求数据
+AnswerEntityMapper <--> AnswerEntity : 通过注入和映射存取数据
+AnswerEntityMapper --> AnswerService : 返回数据
+AnswerService --> AnswerController : 返回结果
+
+QuestionService --> OptionService : 调用服务
+OptionService --> OptionEntityMapper : 请求数据
+OptionEntityMapper <--> OptionEntity : 通过注入和映射存取数据
+OptionEntityMapper --> OptionService : 返回数据
+OptionService --> QuestionService : 返回结果
+QuestionService --> QuestionEntityMapper : 请求数据
+QuestionEntityMapper <--> QuestionEntity : 通过注入和映射存取数据
+QuestionEntityMapper --> QuestionService : 返回数据
+QuestionService --> QuestionOptionEntityMapper : 请求数据
+QuestionOptionEntityMapper <--> QuestionOptionEntity : 通过注入和映射存取数据
+QuestionOptionEntityMapper --> QuestionService : 返回数据
 
 
 @enduml
