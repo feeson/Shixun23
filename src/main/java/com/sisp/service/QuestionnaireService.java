@@ -151,4 +151,20 @@ public class QuestionnaireService {
             return HttpResponseEntityFactory.get400();
         return HttpResponseEntityFactory.get200(questionnaireEntity1);
     }
+
+    public HttpResponseEntity queryQuestionnaireAnswer(
+            QuestionnaireEntity questionnaire) {
+        QuestionnaireEntity questionnaireEntity1 = questionnaireEntityMapper.queryQuestionnaireListByQuestionnaireIdUserId(questionnaire,null);
+        if (questionnaireEntity1==null)
+            return HttpResponseEntityFactory.get400();
+        return HttpResponseEntityFactory.get200(questionnaireEntity1);
+    }
+
+    public HttpResponseEntity analyseQuestionnaireById(
+            QuestionnaireEntity questionnaire) {
+        List<QuestionnaireEntity> questionnaireEntity1 = questionnaireEntityMapper.queryQuestionnaireList(questionnaire);
+        if (questionnaireEntity1==null)
+            return HttpResponseEntityFactory.get400();
+        return HttpResponseEntityFactory.get200(questionnaireEntity1);
+    }
 }

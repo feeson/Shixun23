@@ -53,15 +53,36 @@ public class QuestionnaireController {
         QuestionnaireEntity questionnaire = questionnaireEntity.orElseGet(QuestionnaireEntity::new);
         return questionnaireService.queryQuestionnaireList(questionnaire);
     }
+    @PostMapping("/queryQuestionnaireAnswer")
+    @ApiOperation(value = "根据问卷Id查询所有答题结果")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "问卷ID: 字符串严格等于", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "projectId", value = "项目ID: 字符串严格等于", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "questionnaireName", value = "问卷名称: 模糊等于", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "questionnaireDescription", value = "问卷描述: 模糊等于", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "surveyType", value = "问卷类型: 整型严格等于", dataTypeClass = Integer.class),
+            @ApiImplicitParam(name = "releaseTime", value = "发布时间: 严格等于", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "accessLink", value = "访问链接: 严格等于", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "deleteFlag", value = "删除标记: 整型严格等于", dataTypeClass = Integer.class),
+            @ApiImplicitParam(name = "createdBy", value = "创建用户的ID: 字符串严格等于", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "creationDate", value = "创建日期: 等于YYYY-MM-DD", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "lastUpdatedBy", value = "最后一次修改用户的ID: 字符串严格等于", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "lastUpdateDate", value = "最后一次修改日期: 等于YYYY-MM-DD", dataTypeClass = String.class)
+    })
+    @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", schema = @Schema(implementation = HttpResponseEntity.class)))
+    public HttpResponseEntity queryQuestionnaireAnswer(@RequestBody Optional<QuestionnaireEntity> questionnaireEntity) {
+        QuestionnaireEntity questionnaire = questionnaireEntity.orElseGet(QuestionnaireEntity::new);
+        return questionnaireService.queryQuestionnaireAnswer(questionnaire);
+    }
 
     @Data
-    class queryQuestionnaireListByQuestionnaireIdUserIdDto{
+    public static class queryQuestionnaireListByQuestionnaireIdUserIdDto{
         private QuestionnaireEntity questionnaire;
         private UserEntity userEntity;
     }
 
     @PostMapping("/queryQuestionnaireByQuestionnaireIdUserId")
-    @ApiOperation(value = "根据用户I问卷Id查询问卷结果")
+    @ApiOperation(value = "根据用户Id问卷Id查询问卷结果")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "问卷ID: 字符串严格等于", dataTypeClass = String.class),
             @ApiImplicitParam(name = "projectId", value = "项目ID: 字符串严格等于", dataTypeClass = String.class),
@@ -135,6 +156,15 @@ public class QuestionnaireController {
         } catch (SQLException e) {
             return HttpResponseEntityFactory.get400();
         }
+    }
+    @PostMapping("/analyseQuestionnaireById")
+    @ApiOperation(value = "根据ID查询问卷统计结果")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "删除失败，ID是否正确？")
+    })
+    public HttpResponseEntity analyseQuestionnaireById(@RequestBody QuestionnaireEntity questionnaire) {
+        return questionnaireService.analyseQuestionnaireById(questionnaire);
     }
 
     @PostMapping("/publishQuestionnaire")
