@@ -77,7 +77,7 @@ public class QuestionnaireController {
             @ApiImplicitParam(name = "lastUpdateDate", value = "最后一次修改日期: 等于YYYY-MM-DD", dataTypeClass = String.class)
     })
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", schema = @Schema(implementation = HttpResponseEntity.class)))
-    public HttpResponseEntity queryQuestionnaireListByQuestionnaireIdUserId(@RequestBody Optional<queryQuestionnaireListByQuestionnaireIdUserIdDto> queryQuestionnaireListByQuestionnaireIdUserIdDto) {
+    public HttpResponseEntity queryQuestionnaireListByQuestionnaireIdUserId(@RequestBody Optional<queryQuestionnaireListByQuestionnaireIdUserIdDto> queryQuestionnaireListByQuestionnaireIdUserIdDto) throws SQLException {
         queryQuestionnaireListByQuestionnaireIdUserIdDto queryQuestionnaireListByQuestionnaireIdUserIdDto1 = queryQuestionnaireListByQuestionnaireIdUserIdDto.orElseGet(queryQuestionnaireListByQuestionnaireIdUserIdDto::new);
        return questionnaireService.queryQuestionnaireByQuestionnaireIdUserId(queryQuestionnaireListByQuestionnaireIdUserIdDto1.getQuestionnaire(),queryQuestionnaireListByQuestionnaireIdUserIdDto1.getUserEntity());
     }
